@@ -26,7 +26,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // router api customer
-app.use('/v1', customerRouter)
+app.use('/api/v1', customerRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -20,7 +20,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      avatar: {
+      image: {
         type: Sequelize.TEXT
       },
       createdAt: {

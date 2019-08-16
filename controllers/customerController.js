@@ -43,6 +43,18 @@ async function validateRegister(req) {
       field: 'username',
       message: 'Username is Required',
     })
+  } else {
+    const customer = await Customer.findOne({
+      where: {
+        username: { [Op.eq]: username },
+      }
+    })
+    if (customer) {
+      errors.push({
+        field: 'username',
+        message: 'Username has been taken',
+      })
+    }
   }
 
   if (!phoneNumber) {
@@ -50,6 +62,18 @@ async function validateRegister(req) {
       field: 'phoneNumber',
       message: 'Phone Number is Required',
     });
+  } else {
+    const customer = await Customer.findOne({
+      where: {
+        phoneNumber: { [Op.eq]: phoneNumber },
+      }
+    })
+    if (customer) {
+      errors.push({
+        field: 'phoneNumber',
+        message: 'Phone Number has been taken',
+      })
+    }
   }
 
   if (!password) {
