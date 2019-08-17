@@ -11,6 +11,7 @@
 * [Daftar Isi](#daftar-isi)
 * [Daftar API](#daftar-api)
   * [Customer](#customer)
+  * [Users](#users)
   
 ## Daftar API
 ### Customer
@@ -19,3 +20,10 @@
 | :--------------------------------------------------- | :----- | :--------------------------------------------- | :----- | :--------- | :---------------- |
 | `/api/v1/customer/register`                                     | POST    | create register customer                                | Sudah  | OK         | Tidak             |
 | `/api/v1/customer/signin`                                     | POST    | signin customer                                | Sudah  | OK         | Tidak             |
+
+
+### Users
+
+| Nama Routes                                          | HTTP   | Deskripsi                                      | Dibuat | Hasil Test | Middleware `Auth` |
+| :--------------------------------------------------- | :----- | :--------------------------------------------- | :----- | :--------- | :---------------- |
+| `/api/v1/users/signin`                                     | POST    | signin admin                                | Sudah  | OK         | Tidak |
