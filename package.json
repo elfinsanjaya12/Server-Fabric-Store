@@ -25,6 +25,8 @@
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.15.0",
-    "sequelize-cli": "^5.5.0"
+    "sequelize-cli": "^5.5.0",
+    "sha1": "^1.1.1",
+    "uniqid": "^5.0.3"
   }
 }

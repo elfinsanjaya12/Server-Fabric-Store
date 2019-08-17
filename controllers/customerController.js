@@ -10,7 +10,8 @@ const { Customer } = require('../models')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const Op = require("sequelize").Op
-
+const uniqid = require("uniqid")
+const sha1 = require("sha1")
 
 /**
  * Validation collection that will be used before create data customer
@@ -123,24 +124,23 @@ exports.actionRegisterMobile = async function (req, res) {
     password
   } = req.body
 
+  let salt = sha1(uniqid());
+
   let errors = await validateRegister(req);
   if (errors.length > 0) return res.status(422).json({ errors })
-
-  const hashPassword = bcrypt.hashSync(password, 10);
-  console.log("hello" + name)
+  password = sha1(password + salt)
+  console.log(salt + " " + password)
 
   const customer = await Customer.create({
     name,
     username,
     phoneNumber,
-    password: hashPassword,
+    password,
+    salt
   });
 
   return res.json(customer);
 }
-
-
-
 
 /**
  * Validation collection that will be used before login use username
@@ -150,7 +150,7 @@ exports.actionRegisterMobile = async function (req, res) {
  * @return array
  */
 
-async function validateLoginMobile(req) {
+async function validateLogin(req) {
   /* form validasi mobile  login or signin */
   let { username, password } = req.body
   let errors = []
@@ -170,7 +170,7 @@ async function validateLoginMobile(req) {
   }
 
   if (username && password) {
-    const customer = await CustomerModel.findOne({
+    const customer = await Customer.findOne({
       where: { username: username }
     })
 
@@ -189,5 +189,35 @@ async function validateLoginMobile(req) {
       }
     }
   }
+
   return errors
+}
+
+/**
+ * Verify data user to login
+ * 
+ * @param object req
+ * @param object res 
+ * @return json
+ */
+exports.actionLogin = async function (req, res) {
+  let { username, password } = req.body;
+
+  let errors = await validateLogin(req);
+  if (errors.length > 0) return res.status(422).json({ errors });
+
+  let customer = await Customer.findOne({
+    where: {
+      username: { [Op.eq]: username }
+    }
+  })
+
+  let accessToken = jwt.sign(password, customer.password)
+
+  return res.status(200).json({
+    message: "Success Login Customer",
+    accessToken,
+    customer
+  })
+
 }
