@@ -4,13 +4,14 @@ const uniqid = require("uniqid");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    let salt = sha1(uniqid());
-    const password = sha1("rahasia" + salt);
+    let saltOke = "rahasia"
+    saltOke = sha1(uniqid());
+    const passwordOke = sha1("rahasia" + saltOke);
     return queryInterface.bulkInsert('Users', [{
       username: "admin",
       name: "admin",
-      password: password,
-      salt: salt,
+      password: passwordOke,
+      salt: saltOke,
       status: "super admin"
     }], {});
 

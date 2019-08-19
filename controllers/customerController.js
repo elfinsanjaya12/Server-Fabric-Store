@@ -7,7 +7,7 @@
  */
 
 const { Customer } = require('../models')
-const bcrypt = require("bcrypt")
+const apiConfig = require("../config/api.json")
 const jwt = require("jsonwebtoken")
 const Op = require("sequelize").Op
 const uniqid = require("uniqid")
@@ -123,13 +123,12 @@ exports.actionRegisterMobile = async function (req, res) {
     phoneNumber,
     password
   } = req.body
-
-  let salt = sha1(uniqid());
+  let salt = sha1(uniqid())
 
   let errors = await validateRegister(req);
   if (errors.length > 0) return res.status(422).json({ errors })
+
   password = sha1(password + salt)
-  console.log(salt + " " + password)
 
   const customer = await Customer.create({
     name,
@@ -139,7 +138,10 @@ exports.actionRegisterMobile = async function (req, res) {
     salt
   });
 
-  return res.json(customer);
+  return res.json({
+    message: "Succes create new Customer",
+    customer
+  });
 }
 
 /**
@@ -170,22 +172,22 @@ async function validateLogin(req) {
   }
 
   if (username && password) {
-    const customer = await Customer.findOne({
+    const cus = await Customer.findOne({
       where: { username: username }
-    })
+    });
 
-    if (!customer) {
+    if (!cus) {
       errors.push({
         field: "username",
         message: "Username not found"
-      })
+      });
     } else {
-      password = sha1(password + customer.salt)
-      if (password != customer.password) {
+      password = sha1(password + cus.salt);
+      if (password != cus.password) {
         errors.push({
           field: "password",
           message: "Invalid Password"
-        })
+        });
       }
     }
   }
@@ -201,23 +203,28 @@ async function validateLogin(req) {
  * @return json
  */
 exports.actionLogin = async function (req, res) {
-  let { username, password } = req.body;
+  let { username } = req.body;
 
   let errors = await validateLogin(req);
   if (errors.length > 0) return res.status(422).json({ errors });
 
   let customer = await Customer.findOne({
     where: {
-      username: { [Op.eq]: username }
+      username
     }
   })
 
-  let accessToken = jwt.sign(password, customer.password)
-
-  return res.status(200).json({
-    message: "Success Login Customer",
-    accessToken,
-    customer
-  })
+  try {
+    let customer_ = customer.get({ plain: true });
+    const accessToken = jwt.sign(customer_, apiConfig.key);
+    console.log("accessToken")
+    return res.json({
+      message: "Success Login customer",
+      accessToken,
+      customer
+    });
+  } catch (error) {
+    return res.status(422).json([{ field: "jwt", message: error.message }]);
+  }
 
 }

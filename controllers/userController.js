@@ -10,6 +10,7 @@ const { User } = require("../models")
 const Op = require("sequelize").Op
 const sha1 = require("sha1")
 const jwt = require("jsonwebtoken")
+const apiConfig = require("../config/api.json")
 
 /**
  * Validation collection that will be used before login use username
@@ -81,12 +82,17 @@ exports.actionLogin = async function (req, res) {
     }
   })
 
-  let accessToken = jwt.sign(password, user.password)
+  try {
+    let user_ = user.get({ plain: true });
+    const accessToken = jwt.sign(user_, apiConfig.key);
 
-  return res.status(200).json({
-    message: "Success Login User",
-    accessToken,
-    user
-  })
+    return res.status(200).json({
+      message: "Success Login User",
+      accessToken,
+      user
+    })
+  } catch (error) {
+    return res.status(422).json([{ field: "jwt", message: error.message }]);
+  }
 
 }
