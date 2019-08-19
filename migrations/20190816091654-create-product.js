@@ -11,7 +11,7 @@ module.exports = {
       code: {
         type: Sequelize.STRING
       },
-      nama: {
+      name: {
         type: Sequelize.STRING
       },
       material: {
@@ -30,6 +30,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       deskripsi: {
+        type: Sequelize.TEXT
+      },
+      image: {
         type: Sequelize.TEXT
       },
       like: {
