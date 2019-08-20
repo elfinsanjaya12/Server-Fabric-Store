@@ -19,10 +19,10 @@
 | Nama Routes                                          | HTTP   | Deskripsi                                      | Dibuat | Hasil Test | Middleware `Auth` |
 | :--------------------------------------------------- | :----- | :--------------------------------------------- | :----- | :--------- | :---------------- |
 | `/api/v1/customer/register`                                     | POST    | create register customer                                | Sudah  | OK         | Tidak             |
-| `/api/v1/customer/signin`                                     | POST    | signin customer                                | Sudah  | OK         | Tidak             |
-| `/api/v1/product`                                     | GET    | read all products                  
-              | Sudah  | OK         | Ya |
-| `/api/v1/product/detail/:id`                                     | GET    | read detail product                         | Sudah  | OK         | Ya |
+| `/api/v1/customer/signin`                                     | POST    | signin customer                         | Sudah  | OK         | Tidak |
+| `/api/v1/product`                                     | GET    | read all products                                | Sudah  | OK         | Ya |
+| `/api/v1/product/detail/:id`                                     | GET    | read single product                   | Sudah  | OK         | Ya |
+
 
 ### Users
 
