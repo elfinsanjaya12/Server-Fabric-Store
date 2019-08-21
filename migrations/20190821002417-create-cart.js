@@ -9,12 +9,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       ProductId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "products",
+          key: "id"
+        }
       },
       CustomerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "Customers",
+          key: "id"
+        }
       },
-      permater: {
+      permeter: {
         type: Sequelize.DOUBLE
       },
       createdAt: {

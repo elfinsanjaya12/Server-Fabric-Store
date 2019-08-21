@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 const customerRouter = require('./routes/customer')
 const usersRouter = require('./routes/users')
 const productRouter = require('./routes/product')
+const cartRouter = require('./routes/cart')
 
 var app = express();
 // Initialize CORS
@@ -28,8 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
-// router api customer
-app.use('/api/v1', customerRouter)
+// router api v1
+app.use('/api/v1', customerRouter, cartRouter)
 app.use('/api/v1', usersRouter)
 app.use('/api/v1', productRouter)
 
