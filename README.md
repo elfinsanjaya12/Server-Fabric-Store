@@ -50,6 +50,12 @@ npm dev
 $ npm dev
 ```
 
+### DOCS API
+
+```bash
+$ localhost:3000/api/v1
+```
+
 ## Lisensi
 
 dibuka untuk umum
