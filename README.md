@@ -52,9 +52,8 @@ $ npm dev
 
 ### DOCS API
 
-```bash
-$ localhost:3000/api/v1
-```
+<a href="localhost:3000/api/v1">localhost:3000/api/v1</a>
+
 
 ## Lisensi
 
