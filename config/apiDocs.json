@@ -1,0 +1,96 @@
+[
+  {
+    "/api/v1": "Welcome Fabric Store"
+  },
+  {
+    "customers": {
+      "signin": {
+        "method": "POST",
+        "url": "/api/v1/signin",
+        "params": "",
+        "body": {
+          "username": "example",
+          "password": "example"
+        },
+        "hasil test": "ok",
+        "middleware": "tidak"
+      },
+      "register": {
+        "method": "POST",
+        "url": "/api/v1/register",
+        "params": "",
+        "body": {
+          "name": "example",
+          "username": "example",
+          "phoneNumber": "08237795xxxx",
+          "password": "example",
+          "retypePassword": "example"
+        },
+        "hasil test": "ok",
+        "middleware": "tidak"
+      },
+      "catalog product": {
+        "method": "GET",
+        "url": "/api/v1/product?apiKey=example&accessToken=example",
+        "params": "apiKey&accessToken",
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "detail catalog product": {
+        "method": "GET",
+        "url": "/api/v1/product/{id}?apiKey=example&accessToken=example",
+        "params": "id?apiKey&accessToken",
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "create cart": {
+        "method": "POST",
+        "url": "/api/v1/cart?apiKey=example&accessToken=example",
+        "params": "apiKey&accessToken",
+        "body": {
+          "CustomerId": 1,
+          "ProductId": 1,
+          "permeter": 5
+        },
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "read all cart by CustomerId": {
+        "method": "POST",
+        "url": "/api/v1/cart/${CustomerId}?apiKey=example&accessToken=example",
+        "params": "CustomerId?apiKey&accessToken",
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "update cart": {
+        "method": "PUT",
+        "url": "/api/v1/cart/${id}?apiKey=example&accessToken=example",
+        "params": "id?apiKey&accessToken",
+        "body": {
+          "CustomerId": 1,
+          "ProductId": 1,
+          "permeter": 5
+        },
+        "hasil test": "ok",
+        "middleware": "ya"
+      }
+    }
+  },
+  {
+    "users": {
+      "users signin": {
+        "url": "/api/v1/signin",
+        "params": "",
+        "body": {
+          "username": "example",
+          "password": "example"
+        },
+        "hasil test": "ok",
+        "middleware": "tidak"
+      }
+    }
+  }
+]

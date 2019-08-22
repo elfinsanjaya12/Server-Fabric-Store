@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require("cors");
+const fs = require("fs")
 
 var indexRouter = require('./routes/index');
 
@@ -30,6 +31,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 // router api v1
+app.get("/api/v1", (req, res) => {
+  fs.readFile("config/apiDocs.json", (err, data) => {
+    if (err) {
+      res.status(400).json({
+        error: err
+      });
+    }
+    const docs = JSON.parse(data);
+    res.json(docs);
+  });
+});
 app.use('/api/v1', customerRouter, cartRouter)
 app.use('/api/v1', usersRouter)
 app.use('/api/v1', productRouter)
