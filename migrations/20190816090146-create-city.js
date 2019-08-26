@@ -12,7 +12,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       ProvinceId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "Provinces",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,

@@ -8,11 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      CitiesId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "Cities",
+          key: "id"
+        }
+      },
       name: {
         type: Sequelize.STRING
-      },
-      CityId: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -4,8 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     ProvinceId: DataTypes.INTEGER
   }, {});
-  City.associate = function(models) {
+  City.associate = function (models) {
     // associations can be defined here
+    City.belongsTo(sequelize.models.Province, {
+      foreignKey: "ProvinceId"
+    });
   };
   return City;
 };
