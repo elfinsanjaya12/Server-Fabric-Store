@@ -1,18 +1,12 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Transactions', {
+    return queryInterface.createTable('Addresses', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      noPesanan: {
-        type: Sequelize.STRING
-      },
-      totalHarga: {
-        type: Sequelize.DOUBLE
       },
       CustomerId: {
         type: Sequelize.INTEGER,
@@ -23,34 +17,34 @@ module.exports = {
           key: "id"
         }
       },
-      AddressId: {
+      ProvinceId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         allowNull: false,
         references: {
-          model: "Addresses",
+          model: "Provinces",
           key: "id"
         }
       },
-      status: {
-        type: Sequelize.STRING
+      CitiesId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "Cities",
+          key: "id"
+        }
       },
-      dateOfTransaction: {
-        type: Sequelize.DATE
+      DistrictId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "Districts",
+          key: "id"
+        }
       },
-      typeOfOngkir: {
-        type: Sequelize.STRING
-      },
-      note: {
-        type: Sequelize.STRING
-      },
-      buktiPembayaran: {
-        type: Sequelize.TEXT
-      },
-      shippingCosts: {
-        type: Sequelize.DOUBLE
-      },
-      noResi: {
+      mainAddress: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -64,6 +58,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Transactions');
+    return queryInterface.dropTable('Addresses');
   }
 };

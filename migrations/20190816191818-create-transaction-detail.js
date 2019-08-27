@@ -12,10 +12,22 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       TransactionId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "Transactions",
+          key: "id"
+        }
       },
       ProductId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "products",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,

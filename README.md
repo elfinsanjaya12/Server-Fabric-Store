@@ -44,6 +44,12 @@ npm install -g nodemon
 $ npm install -g nodemon
 ```
 
+import database wilayah
+
+```bash
+wilayah.sql
+```
+
 npm dev
 
 ```bash

@@ -10,7 +10,8 @@
     "tb_reset": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "db_start": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "db_start_no_seeder": "sequelize db:create && sequelize db:migrate",
-    "tb_start": "sequelize db:migrate && sequelize db:seed:all"
+    "tb_start": "sequelize db:migrate && sequelize db:seed:all",
+    "seed": "sequelize db:seed:all"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

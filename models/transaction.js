@@ -13,8 +13,16 @@ module.exports = (sequelize, DataTypes) => {
     shippingCosts: DataTypes.DOUBLE,
     noResi: DataTypes.STRING
   }, {});
-  Transaction.associate = function(models) {
+  Transaction.associate = function (models) {
     // associations can be defined here
+    Transaction.belongsTo(sequelize.models.Customer, {
+      foreignKey: "CustomerId"
+    });
+
+    Transaction.belongsTo(sequelize.models.Address, {
+      foreignKey: "AddressId"
+    });
+    // Transaction.hasmany(sequelize.models.TransactionDetail)
   };
   return Transaction;
 };
