@@ -1,10 +1,8 @@
-/**
+
   * Fabric Store
   * @gmail elfinsanjaya12@gmail.com
   * @kontak 08154023099
   * @author Elfin Sanjaya 
-*/
-
 
 ## Usage
 
@@ -44,10 +42,26 @@ npm install -g nodemon
 $ npm install -g nodemon
 ```
 
+sequelize db:create
+
+```bash
+$ sequelize db:create
+```
+
 import database wilayah
 
 ```bash
 wilayah.sql
+```
+
+sequelize db:migrate
+```bash
+$ sequelize db:create
+```
+
+sequelize db:seed:all
+```bash
+$ sequelize db:seed:all
 ```
 
 npm dev

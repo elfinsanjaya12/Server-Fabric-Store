@@ -32,7 +32,10 @@
       "catalog product": {
         "method": "GET",
         "url": "/api/v1/product?apiKey=example&accessToken=example",
-        "params": "apiKey&accessToken",
+        "params": {
+          "apiKey": "example",
+          "accessToken": "example"
+        },
         "body": "",
         "hasil test": "ok",
         "middleware": "ya"
@@ -40,7 +43,11 @@
       "detail catalog product": {
         "method": "GET",
         "url": "/api/v1/product/{id}?apiKey=example&accessToken=example",
-        "params": "id?apiKey&accessToken",
+        "params": {
+          "id": "id",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
         "body": "",
         "hasil test": "ok",
         "middleware": "ya"
@@ -48,7 +55,10 @@
       "create cart": {
         "method": "POST",
         "url": "/api/v1/cart?apiKey=example&accessToken=example",
-        "params": "apiKey&accessToken",
+        "params": {
+          "apiKey": "example",
+          "accessToken": "example"
+        },
         "body": {
           "CustomerId": 1,
           "ProductId": 1,
@@ -60,7 +70,11 @@
       "read all cart by CustomerId": {
         "method": "POST",
         "url": "/api/v1/cart/${CustomerId}?apiKey=example&accessToken=example",
-        "params": "CustomerId?apiKey&accessToken",
+        "params": {
+          "CustomerId": "CustomerId",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
         "body": "",
         "hasil test": "ok",
         "middleware": "ya"
@@ -68,11 +82,44 @@
       "update cart": {
         "method": "PUT",
         "url": "/api/v1/cart/${id}?apiKey=example&accessToken=example",
-        "params": "id?apiKey&accessToken",
+        "params": {
+          "id": "id",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
         "body": {
           "CustomerId": 1,
           "ProductId": 1,
           "permeter": 5
+        },
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "read all address single": {
+        "method": "GET",
+        "url": "/api/v1/address/${CustomerId}?apiKey=example&accessToken=example",
+        "params": {
+          "CustomerId": "CustomerId",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "create address": {
+        "method": "POST",
+        "url": "/api/v1/address?apiKey=example&accessToken=example",
+        "params": {
+          "apiKey": "example",
+          "accessToken": "example"
+        },
+        "body": {
+          "CustomerId": "CustomerId",
+          "ProvinceId": "ProductId",
+          "CitiesId": "CitiesId",
+          "DistrictId": "DistrictId",
+          "mainAddress": "mainAddress"
         },
         "hasil test": "ok",
         "middleware": "ya"

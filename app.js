@@ -13,6 +13,7 @@ const customerRouter = require('./routes/customer')
 const usersRouter = require('./routes/users')
 const productRouter = require('./routes/product')
 const cartRouter = require('./routes/cart')
+const addressRouter = require('./routes/address')
 
 var app = express();
 // Initialize CORS
@@ -42,9 +43,12 @@ app.get("/api/v1", (req, res) => {
     res.json(docs);
   });
 });
-app.use('/api/v1', customerRouter, cartRouter)
+
+app.use('/api/v1', customerRouter)
 app.use('/api/v1', usersRouter)
 app.use('/api/v1', productRouter)
+app.use('/api/v1', cartRouter)
+app.use('/api/v1', addressRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
