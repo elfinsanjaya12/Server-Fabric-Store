@@ -123,6 +123,30 @@
         },
         "hasil test": "ok",
         "middleware": "ya"
+      },
+      "action read single address": {
+        "method": "GET",
+        "url": "/api/v1/address/edit/${id}?apiKey=example&accessToken=example",
+        "params": {
+          "id": "id",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "delete address": {
+        "method": "DELETE",
+        "url": "/api/v1/address/${id}?apiKey=example&accessToken=example",
+        "params": {
+          "id": "id",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
       }
     }
   },

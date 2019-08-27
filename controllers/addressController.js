@@ -213,3 +213,66 @@ exports.actionCreate = async (req, res) => {
     console.log(err)
   }
 }
+
+async function validateRead(req) {
+  const { id } = req.params
+  let errors = []
+  if (id) {
+    try {
+      const address = await Address.findOne({
+        where: {
+          id: { [Op.eq]: id },
+        }
+      })
+      if (address === null || address === "") {
+        errors.push({
+          field: 'id',
+          message: 'Id Not Found',
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return errors
+}
+
+exports.actionReadSingleAddress = async (req, res) => {
+  const { id } = req.params
+
+  let error = await validateRead(req)
+  if (error.length > 0) return res.status(422).json({ error })
+
+  try {
+    const address = await Address.findOne({
+      ...include,
+      where: { id: { [Op.eq]: id } }
+    })
+
+    return res.status(201).json({
+      message: "Success Read Single Address",
+      address
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+exports.actionDelete = async function (req, res) {
+  const { id } = req.params;
+
+  let error = await validateRead(req)
+  if (error.length > 0) return res.status(422).json({ error })
+
+  Address.findOne({ where: { id: { [Op.eq]: id } } })
+    .then((address) => {
+      return address.destroy();
+    })
+    .then((address) => {
+      res.status(200).json({ message: "Success Delete", address });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal server error" });
+    });
+
+};
