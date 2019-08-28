@@ -4,7 +4,15 @@
     "password": null,
     "database": "db_fabric_store_mysql",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "pool": {
+      "max": 100,
+      "min": 0,
+      "idle": 10000
+    },
+    "define": {
+      "timestamps": false
+    }
   },
   "test": {
     "username": "root",
