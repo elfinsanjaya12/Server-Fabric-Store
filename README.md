@@ -72,7 +72,11 @@ $ npm dev
 
 ### DOCS API
 
+### Local
 <a href="localhost:3000/api/v1">localhost:3000/api/v1</a>
+
+### Deploy
+<a href="https://fabric-store.herokuapp.com/api/v1">https://fabric-store.herokuapp.com/api/v1</a>
 
 
 ## Lisensi
