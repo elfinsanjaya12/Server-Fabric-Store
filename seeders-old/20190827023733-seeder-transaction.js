@@ -13,7 +13,9 @@ module.exports = {
       note: 'Note',
       buktiPembayaran: 'image',
       shippingCosts: 20000,
-      noResi: 'No. Resi'
+      noResi: 'No. Resi',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
 
   },

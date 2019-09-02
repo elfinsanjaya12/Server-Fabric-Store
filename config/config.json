@@ -1,18 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "db_fabric_store_mysql",
+    "username": "postgres",
+    "password": " ",
+    "database": "db_fabric_store",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "pool": {
-      "max": 100,
-      "min": 0,
-      "idle": 10000
-    },
-    "define": {
-      "timestamps": false
-    }
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",
@@ -22,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "upkzcfxhmvizox",
+    "password": "5f3ce995985c101daae411a09d6237fcfd7a57e9f0048fda00a01e724c54a5c2",
+    "database": "deuf8defh8borc",
+    "host": "ec2-184-73-169-163.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }

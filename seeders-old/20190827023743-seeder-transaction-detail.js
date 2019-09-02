@@ -5,7 +5,9 @@ module.exports = {
     return queryInterface.bulkInsert('TransactionDetails', [{
       length: 3,
       TransactionId: 1,
-      ProductId: 1
+      ProductId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
 
   },

@@ -74,7 +74,10 @@ exports.actionLogin = async function (req, res) {
   let { username, password } = req.body;
 
   let errors = await validateLogin(req);
-  if (errors.length > 0) return res.status(422).json({ errors });
+  if (errors.length > 0) {
+    console.log(errors)
+    return res.status(422).json({ message: errors });
+  }
 
   let user = await User.findOne({
     where: {
@@ -92,7 +95,8 @@ exports.actionLogin = async function (req, res) {
       user
     })
   } catch (error) {
-    return res.status(422).json([{ field: "jwt", message: error.message }]);
+    console.log(error)
+    return res.status(422).json({ field: "jwt", message: error.message });
   }
 
 }

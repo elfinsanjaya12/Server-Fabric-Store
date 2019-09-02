@@ -7,7 +7,9 @@ module.exports = {
       ProvinceId: 11,
       CitiesId: 1101,
       DistrictId: 1101010,
-      mainAddress: "Jln. Abdul Kadir Gg. Pipit No.225"
+      mainAddress: "Jln. Abdul Kadir Gg. Pipit No.225",
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
   },
 
