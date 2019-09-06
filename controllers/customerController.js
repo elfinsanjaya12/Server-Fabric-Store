@@ -130,7 +130,7 @@ exports.actionRegisterMobile = async function (req, res) {
 
   password = sha1(password + salt)
 
-  const customer = await Customer.create({
+  let customerCreate = await Customer.create({
     name,
     username,
     phoneNumber,
@@ -138,10 +138,32 @@ exports.actionRegisterMobile = async function (req, res) {
     salt
   });
 
-  return res.json({
-    message: "Succes create new Customer",
-    customer
-  });
+  errors = await validateLogin(req);
+  if (errors.length > 0) return res.status(422).json({ errors });
+
+  let customer = await Customer.findOne({
+    where: {
+      username
+    }
+  })
+
+  try {
+    let customer_ = customer.get({ plain: true });
+    const accessToken = jwt.sign(customer_, apiConfig.key);
+    console.log("accessToken")
+    return res.json({
+      message: "Success Signup customer",
+      accessToken,
+      customerCreate
+    });
+  } catch (error) {
+    return res.status(422).json([{ field: "jwt", message: error.message }]);
+  }
+
+  // return res.json({
+  //   message: "Succes create new Customer",
+  //   customer
+  // });
 }
 
 /**
