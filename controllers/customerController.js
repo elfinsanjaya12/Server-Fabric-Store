@@ -135,35 +135,34 @@ exports.actionRegisterMobile = async function (req, res) {
     username,
     phoneNumber,
     password,
-    salt
+    salt,
+    status: 'Active'
   });
 
-  errors = await validateLogin(req);
-  if (errors.length > 0) return res.status(422).json({ errors });
+  if (customerCreate) {
+    errors = await validateLogin(req);
+    if (errors.length > 0) return res.status(422).json({ errors });
 
-  let customer = await Customer.findOne({
-    where: {
-      username
+    let customer = await Customer.findOne({
+      where: {
+        username: { [Op.eq]: username },
+        status: 'Active'
+      }
+    })
+
+    try {
+      let customer_ = customer.get({ plain: true });
+      const accessToken = jwt.sign(customer_, apiConfig.key);
+      console.log("accessToken")
+      return res.json({
+        message: "Success Signup customer",
+        accessToken,
+        customerCreate
+      });
+    } catch (error) {
+      return res.status(422).json([{ field: "jwt", message: error.message }]);
     }
-  })
-
-  try {
-    let customer_ = customer.get({ plain: true });
-    const accessToken = jwt.sign(customer_, apiConfig.key);
-    console.log("accessToken")
-    return res.json({
-      message: "Success Signup customer",
-      accessToken,
-      customerCreate
-    });
-  } catch (error) {
-    return res.status(422).json([{ field: "jwt", message: error.message }]);
   }
-
-  // return res.json({
-  //   message: "Succes create new Customer",
-  //   customer
-  // });
 }
 
 /**
@@ -195,7 +194,10 @@ async function validateLogin(req) {
 
   if (username && password) {
     const cus = await Customer.findOne({
-      where: { username: username }
+      where: {
+        username: { [Op.eq]: username },
+        status: 'Active'
+      }
     });
 
     if (!cus) {
@@ -232,7 +234,8 @@ exports.actionLogin = async function (req, res) {
 
   let customer = await Customer.findOne({
     where: {
-      username
+      username: { [Op.eq]: username },
+      status: 'Active'
     }
   })
 
@@ -248,5 +251,44 @@ exports.actionLogin = async function (req, res) {
   } catch (error) {
     return res.status(422).json([{ field: "jwt", message: error.message }]);
   }
+}
 
+exports.actionRead = async (req, res) => {
+  try {
+    let customer = await Customer.findAll()
+    return res.json({
+      message: "Success Read All Customer",
+      customer
+    });
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+exports.actionUpdateStatus = async (req, res) => {
+  const { id } = req.params
+  try {
+    const customer = await Customer.findOne({
+      where: { id: { [Op.eq]: id }, }
+    })
+
+    if (customer.status === "Active") {
+      customer.status = "Nonactive"
+      await customer.save();
+      return res.status(201).json({
+        message: "Success Update Status Nonactive",
+        customer
+      })
+    } else {
+      customer.status = "Active"
+      await customer.save();
+      return res.status(201).json({
+        message: "Success Update Status Active",
+        customer
+      })
+    }
+
+  } catch (err) {
+    console.log(err)
+  }
 }

@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       phoneNumber: {
         type: Sequelize.STRING
@@ -21,6 +22,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       salt: {
+        type: Sequelize.STRING
+      },
+      // email: {
+      //   type: Sequelize.STRING,
+      //   unique: true
+      // },
+      status: {
         type: Sequelize.STRING
       },
       image: {

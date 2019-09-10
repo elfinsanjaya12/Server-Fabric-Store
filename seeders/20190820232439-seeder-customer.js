@@ -8,16 +8,30 @@ module.exports = {
     let salt = "rahasia"
     salt = sha1(uniqid());
     let password = sha1("rahasia" + salt);
-    return queryInterface.bulkInsert('Customers', [{
-      name: 'John Doe',
-      username: 'ali',
-      phoneNumber: '082377954008',
-      password: password,
-      salt: salt,
-      image: '',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
+    return queryInterface.bulkInsert('Customers', [
+      {
+        name: 'John Doe',
+        username: 'ali',
+        phoneNumber: '082377954008',
+        password: password,
+        salt: salt,
+        status: 'Active',
+        image: '',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Elfin Sanjaya',
+        username: 'elfin',
+        phoneNumber: '08154023099',
+        password: password,
+        salt: salt,
+        status: 'Nonactive',
+        image: '',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {
