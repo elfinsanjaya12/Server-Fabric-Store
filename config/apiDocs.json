@@ -6,7 +6,7 @@
     "customers": {
       "signin": {
         "method": "POST",
-        "url": "/api/v1/signin",
+        "url": "/api/v1/customer/signin",
         "params": "",
         "body": {
           "username": "example",
@@ -17,7 +17,7 @@
       },
       "register": {
         "method": "POST",
-        "url": "/api/v1/register",
+        "url": "/api/v1/customer/register",
         "params": "",
         "body": {
           "name": "example",
