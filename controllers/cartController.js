@@ -262,3 +262,20 @@ exports.actionCreate = async function (req, res) {
   }
 
 }
+
+exports.actionDeleteById = async function (req, res) {
+  const { id } = req.params
+
+  Cart.findOne({
+    where: { id: { [Op.eq]: id } }
+  })
+    .then((cart) => {
+      return cart.destroy();
+    })
+    .then((cart) => {
+      res.status(200).json({ message: "Success Delete", cart });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal server error" });
+    });
+}

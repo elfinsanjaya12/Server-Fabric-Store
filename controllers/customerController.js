@@ -292,3 +292,23 @@ exports.actionUpdateStatus = async (req, res) => {
     console.log(err)
   }
 }
+
+exports.actionReadSingleCustomer = async (req, res) => {
+  const {id} = req.params
+
+  try{
+    const customer = await Customer.findOne({
+      where:{
+        id:{[Op.eq]:id}
+      }
+    })
+
+   return res.status(200).json({
+      message : "Success Read Single Data Customer",
+      customer
+    })
+  }catch(err){
+    console.log(err)
+  }
+
+}

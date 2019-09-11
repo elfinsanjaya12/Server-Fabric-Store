@@ -5,7 +5,8 @@ const {
   actionRegisterMobile,
   actionLogin,
   actionRead,
-  actionUpdateStatus
+  actionUpdateStatus,
+  actionReadSingleCustomer
 } = require("../controllers/customerController")
 const auth = require("../middlewares/auth")
 
@@ -14,6 +15,7 @@ router.post("/customer/signin", actionLogin)
 
 router.use("/customer", auth)
 router.get("/customer", actionRead)
+router.get("/customer/:id", actionReadSingleCustomer)
 router.put("/customer/status/:id", actionUpdateStatus)
 
 module.exports = router
