@@ -15,6 +15,7 @@ const productRouter = require('./routes/product')
 const cartRouter = require('./routes/cart')
 const addressRouter = require('./routes/address')
 const transactionRouter = require('./routes/transaction')
+const provinceRouter = require('./routes/province')
 
 var app = express();
 // Initialize CORS
@@ -51,6 +52,7 @@ app.use('/api/v1', productRouter)
 app.use('/api/v1', cartRouter)
 app.use('/api/v1', addressRouter)
 app.use('/api/v1', transactionRouter)
+app.use('/api/v1', provinceRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

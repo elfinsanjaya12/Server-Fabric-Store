@@ -14,6 +14,7 @@
     "seed": "sequelize db:seed:all"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
