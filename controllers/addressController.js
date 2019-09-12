@@ -36,7 +36,7 @@ async function validateCustomerId(req) {
         })
       }
     } catch (err) {
-      console.log(err)
+      throw err
     }
   }
   return errors
@@ -66,7 +66,8 @@ exports.actionReadAllSingleCustomer = async (req, res) => {
       address
     })
   } catch (err) {
-    console.log(address)
+    console.log(err)
+    throw err
   }
 }
 
@@ -101,6 +102,7 @@ async function validate(req) {
       }
     } catch (err) {
       console.log(err)
+      throw err
     }
   }
 
@@ -147,6 +149,7 @@ async function validate(req) {
       }
     } catch (err) {
       console.log(err)
+      throw err
     }
   }
 
@@ -255,6 +258,7 @@ exports.actionReadSingleAddress = async (req, res) => {
     })
   } catch (err) {
     console.log(err)
+    throw err
   }
 }
 
