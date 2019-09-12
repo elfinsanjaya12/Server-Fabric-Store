@@ -17,6 +17,7 @@ const addressRouter = require('./routes/address')
 const transactionRouter = require('./routes/transaction')
 const provinceRouter = require('./routes/province')
 const cityRouter = require('./routes/cities')
+const districtRouter = require('./routes/district')
 
 var app = express();
 // Initialize CORS
@@ -55,6 +56,7 @@ app.use('/api/v1', addressRouter)
 app.use('/api/v1', transactionRouter)
 app.use('/api/v1', provinceRouter)
 app.use('/api/v1', cityRouter)
+app.use('/api/v1', districtRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
