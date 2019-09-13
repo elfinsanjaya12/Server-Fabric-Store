@@ -51,8 +51,8 @@ async function validateCustomerId(req) {
  */
 exports.actionReadAllSingleCustomer = async (req, res) => {
   const { CustomerId } = req.params
-  let error = await validateCustomerId(req)
-  if (error.length > 0) return res.status(422).json({ error })
+  // let error = await validateCustomerId(req)
+  // if (error.length > 0) return res.status(422).json({ error })
 
   try {
     const address = await Address.findAll({
