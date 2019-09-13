@@ -93,7 +93,22 @@ exports.actionCreate = async (req, res) => {
   }).catch((err) => {
 
   });
+}
 
+exports.actionReadTransaction = async (req, res) => {
+  try {
+    const { CustomerId } = req.params
+    const transaction = await Transaction.findAll({
+      where: {
+        CustomerId: { [Op.eq]: CustomerId }
+      }
+    })
 
-
+    return res.status(200).json({
+      message: "Success Read Transaction",
+      transaction
+    })
+  } catch (err) {
+    throw err
+  }
 }
