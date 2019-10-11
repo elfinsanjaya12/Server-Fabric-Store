@@ -236,26 +236,38 @@ async function validateCreate(req) {
 }
 
 exports.actionCreate = async function (req, res) {
-  let {
+  var {
     CustomerId,
     ProductId,
     permeter
   } = req.body
 
+
   let errors = await validateCreate(req)
   if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
-    const cart = await Cart.create({
-      CustomerId,
-      ProductId,
-      permeter
+    const cekCart = await Cart.findOne({
+      where: { ProductId: { [Op.eq]: ProductId } }
     })
-
-    return res.status(200).json({
-      message: "Success Create Cart",
-      cart
-    })
+    if (cekCart) {
+      cekCart.permeter += parseFloat(permeter)
+      await cekCart.save();
+      return res.status(200).json({
+        message: "Success Create Cart",
+        cart: cekCart
+      })
+    } else {
+      const cart = await Cart.create({
+        CustomerId,
+        ProductId,
+        permeter
+      })
+      return res.status(200).json({
+        message: "Success Create Cart",
+        cart
+      })
+    }
 
   } catch (err) {
     console.log(err)
