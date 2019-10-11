@@ -21,13 +21,21 @@ const districtRouter = require('./routes/district')
 
 const cekOngkirRouter = require('./routes/raja-ongkir');
 
+// import view admin or router admin
+const adminRouter = require('./routes/admin');
+
 var app = express();
 // Initialize CORS
 app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
+
+// setup admin lte
+app.use("/adminlte",
+  express.static(path.join(__dirname, "/node_modules/admin-lte/"))
+)
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -50,6 +58,7 @@ app.get("/api/v1", (req, res) => {
   });
 });
 
+// router api
 app.use('/api/v1', customerRouter)
 app.use('/api/v1', usersRouter)
 app.use('/api/v1', productRouter)
@@ -61,6 +70,16 @@ app.use('/api/v1', cityRouter)
 app.use('/api/v1', districtRouter)
 // ongkir
 app.use('/api/v1/cek-ongkir', cekOngkirRouter);
+
+// cek url active
+app.use(function (req, res, next) {
+  res.locals.stuff = {
+    url: req.originalUrl
+  }
+  next();
+});
+// router admin
+app.use('/admin', adminRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

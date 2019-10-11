@@ -1,0 +1,151 @@
+<%- include ../../partials/admin_layout/header.ejs %>
+<%- include ../../partials/admin_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+
+      <div class="col-xs-12">
+        <div class="box">
+          <!-- /.box-header -->
+          <div class="box-header">
+            <h3 class="box-title">Data catalogs</h3>
+          </div>
+
+          <div class="box-body">
+            <div style="margin: 0 20px 20px 20px;">
+              <!-- <button class="btn btn-success">Tambah</button> -->
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-modal">
+                Tambah
+              </button>
+            </div>
+            <table id="catalog" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Kode</th>
+                  <th>Nama Product</th>
+                  <th>Stok</th>
+                  <th>Harga</th>
+                  <th>Varian Warna</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < catalogs.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= catalogs[i].code %></td>
+                  <td><%= catalogs[i].name %></td>
+                  <td><%= catalogs[i].stok %></td>
+                  <td><%= catalogs[i].harga %></td>
+                  <td><%= catalogs[i].warna %></td>
+                  <td>
+                    <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                      Edit
+                    </a>
+                    <button class="btn btn-danger btn-sm" onclick="update_status(`<%= catalogs[i].id %>`)"
+                      data-id="<%= catalogs[i].id %>">
+                      <span class="glyphicon glyphicon-remove"></span>
+                      Active
+                    </button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- iclude modal add -->
+
+
+<!-- iclude modal edit -->
+
+
+<%- include ../../partials/admin_layout/footer.ejs %>
+<!-- page script -->
+<script>
+  $(document).ready(function () {
+    // datatable
+    $('#catalog').DataTable()
+
+    // redirect halaman catalogs
+    function halamancatalogs() {
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/catalogs')
+    }
+
+    // function simpan
+    $('#simpan_catalogs').on('submit', function (event) {
+      event.preventDefault();
+      $.ajax({
+        url: "/admin/catalogs/create",
+        method: "POST",
+        data: $(this).serialize(),
+        success: function () {
+          swal({
+            title: "Success",
+            text: "Success Tambah Data catalogs",
+            icon: "success",
+            button: "Oke",
+          }).then(sukses => {
+            halamancatalogs();
+          });
+        },
+      })
+    })
+
+    //showing data to e edit modal 
+    $('#catalogs').on('click', '.edit', function () {
+      const id = $(this).data('id');
+      const nip = $(this).data('nip');
+      const kepala_sekolah = $(this).data('kepala');
+      const tgl_raport = $(this).data('tgl');
+      const catalogs = $(this).data('catalogs');
+      const semester = $(this).data('semester');
+
+
+      $('#edit-modal').modal('show');
+      $('.id').val(id);
+      $('.nip').val(nip);
+      $('.kepala_sekolah').val(kepala_sekolah);
+      $('.tgl_raport').val(tgl_raport);
+      $('.catalogs').val(catalogs);
+      $('.semester').val(semester);
+    });
+  })
+
+  // Change Status 
+  function update_status(id) {
+    let idcatalogs = id;
+    swal({
+      title: "Yakin Ingin Change Status?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        swal({
+          title: "Success",
+          text: "Success Change Status",
+          icon: "success",
+        }).then(suksesChange => {
+          window.location.assign(`/admin/catalogs/status/${idcatalogs}`);
+        });
+      }
+    });
+  }
+
+</script>
