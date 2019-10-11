@@ -29,6 +29,7 @@
     "mysql2": "^1.6.5",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
+    "rajaongkir-node-js": "^2.0.1",
     "sequelize": "^5.15.0",
     "sequelize-cli": "^5.5.0",
     "sha1": "^1.1.1",
