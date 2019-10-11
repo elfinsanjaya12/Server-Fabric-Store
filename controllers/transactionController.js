@@ -5,7 +5,7 @@ const { Transaction,
   Cart,
   Product
 } = require("../models")
-const sequelize = require('sequelize')
+
 const Op = require("sequelize").Op
 
 
@@ -78,7 +78,7 @@ exports.actionCreate = async (req, res) => {
       console.log(product.stok)
 
       if (product) {
-        product.stok = product.stok - cart[x].permeter
+        product.stok -= cart[x].permeter
         await product.save()
       }
 

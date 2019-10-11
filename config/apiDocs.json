@@ -159,6 +159,36 @@
         "body": "",
         "hasil test": "ok",
         "middleware": "ya"
+      },
+      "read all transaction by CustomerId": {
+        "method": "POST",
+        "url": "/api/v1/transaction/${CustomerId}?apiKey=example&accessToken=example",
+        "params": {
+          "CustomerId": "CustomerId",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "create transaction": {
+        "method": "POST",
+        "url": "/api/v1/transaction?apiKey=example&accessToken=example",
+        "params": {
+          "apiKey": "example",
+          "accessToken": "example"
+        },
+        "body": {
+          "CustomerId": 1,
+          "totalHarga": 1000000,
+          "AddressId": 1,
+          "typeOfOngkir": "JNE",
+          "note": "Catatan Pembeli",
+          "shippingCosts": 10000
+        },
+        "hasil test": "ok",
+        "middleware": "ya"
       }
     }
   },
