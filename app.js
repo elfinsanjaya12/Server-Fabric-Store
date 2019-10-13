@@ -6,6 +6,11 @@ var logger = require('morgan');
 const cors = require("cors");
 const fs = require("fs")
 
+// package yang di gunakan untuk admin
+const flash = require("connect-flash");
+const session = require('express-session');
+const fileUpload = require("express-fileupload");
+
 var indexRouter = require('./routes/index');
 
 // router api customer
@@ -41,7 +46,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat', cookie: {} }));
+app.use(flash());
+app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
+// add app use yang di gunakan admin
 
 app.use('/', indexRouter);
 

@@ -2,7 +2,14 @@ let express = require("express")
 let router = express.Router()
 const {
   viewDashboard,
-  viewCatalog
+  // controller catalog
+  viewCatalog,
+  actionCatalogCreate,
+  /* controller customer */
+  viewCustomer,
+  viewCustomerInDetail,
+  actionCustomerUpdateStatus,
+  viewTransaction
 } = require("../controllers/adminController");
 
 
@@ -14,6 +21,15 @@ router.get("/dashboard", viewDashboard);
 
 // router catalog product 
 router.get("/catalog", viewCatalog);
+router.post("/catalog/create", actionCatalogCreate);
+
+// router customer 
+router.get("/customer", viewCustomer);
+router.get("/customer/detail/:id", viewCustomerInDetail);
+router.get("/customer/status/:id", actionCustomerUpdateStatus);
+
+// router transaction
+router.get("/transaction", viewTransaction);
 
 
 
