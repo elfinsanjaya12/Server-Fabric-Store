@@ -84,12 +84,33 @@ exports.actionCatalogCreate = async (req, res) => {
       req.flash('alertStatus', 'success');
       res.redirect("/admin/catalog");
     }).catch((err) => {
+      // tambah notifi error
       res.redirect("/admin/catalog");
     });
 
   } catch (error) {
     console.log(error)
   }
+}
+
+exports.actionCatalogDetele = (req, res) => {
+  const { id } = req.params
+  Product.findOne({
+    where: {
+      id: { [Op.eq]: id }
+    }
+  }).then(product => {
+    return product.destroy().then(() => {
+      req.flash('alertMessage', `Sukses Menghapus Data Catalog dengan nama : ${product.name}`)
+      req.flash('alertStatus', 'success')
+      res.redirect("/admin/catalog")
+    });
+  })
+    .catch(err => {
+      req.flash('alertMessage', err.message)
+      req.flash('alertStatus', 'danger')
+      res.redirect("/admin/mahasiswa/view")
+    });
 }
 
 /* ============================================================================== */

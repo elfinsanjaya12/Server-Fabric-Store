@@ -2,12 +2,6 @@
 <%- include ../../partials/admin_layout/sidebar.ejs %>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <% if(alert.message != '') { %>
-  <br>
-  <div class="alert alert-<%= alert.status %>" style="text-align: center;">
-    <strong><%= alert.message %></strong>
-  </div>
-  <% } %>
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -17,6 +11,12 @@
       <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       <li class="active">Catalog</li>
     </ol>
+    <% if(alert.message != '') { %>
+    <br>
+    <div class="alert alert-<%= alert.status %>" style="text-align: center;">
+      <strong><%= alert.message %></strong>
+    </div>
+    <% } %>
   </section>
 
 
@@ -72,7 +72,7 @@
                       <span class="glyphicon glyphicon-pencil"></span>
                       Edit
                     </a>
-                    <button class="btn btn-danger btn-sm" onclick="update_status(`<%= catalogs[i].id %>`)"
+                    <button class="btn btn-danger btn-sm" onclick="delete_catalog(`<%= catalogs[i].id %>`)"
                       data-id="<%= catalogs[i].id %>">
                       <span class="glyphicon glyphicon-remove"></span>
                       Delete
@@ -99,6 +99,7 @@
 
 
 <!-- iclude modal edit -->
+<%- include edit_modal.ejs %>
 
 
 <%- include ../../partials/admin_layout/footer.ejs %>
@@ -110,70 +111,33 @@
 
     // redirect halaman catalogs
     function halamancatalogs() {
-      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/catalogs')
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/catalog')
     }
 
-    // function simpan
-    $('#simpan_catalogs').on('submit', function (event) {
-      event.preventDefault();
-      $.ajax({
-        url: "/admin/catalogs/create",
-        method: "POST",
-        data: $(this).serialize(),
-        success: function () {
-          swal({
-            title: "Success",
-            text: "Success Tambah Data catalogs",
-            icon: "success",
-            button: "Oke",
-          }).then(sukses => {
-            halamancatalogs();
-          });
-        },
-      })
-    })
-
     //showing data to e edit modal 
-    $('#catalogs').on('click', '.edit', function () {
+    $('#catalog').on('click', '.edit', function () {
       const id = $(this).data('id');
-      const nip = $(this).data('nip');
-      const kepala_sekolah = $(this).data('kepala');
-      const tgl_raport = $(this).data('tgl');
-      const catalogs = $(this).data('catalogs');
-      const semester = $(this).data('semester');
-
 
       $('#edit-modal').modal('show');
       $('.id').val(id);
-      $('.nip').val(nip);
-      $('.kepala_sekolah').val(kepala_sekolah);
-      $('.tgl_raport').val(tgl_raport);
-      $('.catalogs').val(catalogs);
-      $('.semester').val(semester);
     });
   })
 
-  // Change Status 
-  function update_status(id) {
-    let idcatalogs = id;
+  function delete_catalog(id) {
+    let CatalogId = id;
+    console.log(CatalogId)
     swal({
-      title: "Yakin Ingin Change Status?",
+      title: "Yakin Ingin Menghapus Data Mahasiswa ini?",
+      text: "Data yang dihapus, tidak bisa kembali lagi.",
       icon: "warning",
       buttons: true,
-      dangerMode: true,
+      dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        swal({
-          title: "Success",
-          text: "Success Change Status",
-          icon: "success",
-        }).then(suksesChange => {
-          window.location.assign(`/admin/catalogs/status/${idcatalogs}`);
-        });
+        window.location.assign(`/admin/catalog/delete/${CatalogId}`);
       }
     });
   }
-
   // validasi foto
   function validasiFile() {
     var inputFile = document.getElementById('inputFoto');

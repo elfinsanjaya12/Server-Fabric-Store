@@ -5,6 +5,7 @@ const {
   // controller catalog
   viewCatalog,
   actionCatalogCreate,
+  actionCatalogDetele,
   /* controller customer */
   viewCustomer,
   viewCustomerInDetail,
@@ -22,6 +23,7 @@ router.get("/dashboard", viewDashboard);
 // router catalog product 
 router.get("/catalog", viewCatalog);
 router.post("/catalog/create", actionCatalogCreate);
+router.get("/catalog/delete/:id", actionCatalogDetele);
 
 // router customer 
 router.get("/customer", viewCustomer);
