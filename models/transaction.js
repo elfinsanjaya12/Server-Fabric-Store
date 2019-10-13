@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     AddressId: DataTypes.INTEGER,
     status: DataTypes.STRING,
     dateOfTransaction: DataTypes.DATE,
+    waktu: DataTypes.TIME,
     typeOfOngkir: DataTypes.STRING,
     note: DataTypes.STRING,
     buktiPembayaran: DataTypes.TEXT,
