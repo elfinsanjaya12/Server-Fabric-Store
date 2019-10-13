@@ -1,0 +1,134 @@
+<%- include ../../partials/admin_layout/header.ejs %>
+<%- include ../../partials/admin_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Customer
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active">Customer</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+
+      <div class="col-xs-12">
+        <div class="box">
+          <!-- /.box-header -->
+          <div class="box-header">
+            <h3 class="box-title">Data Customer</h3>
+          </div>
+
+          <div class="box-body">
+            <!-- <div style="margin: 0 20px 20px 20px;">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-modal">
+                Tambah
+              </button>
+            </div> -->
+            <table id="customer" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Username</th>
+                  <th>No. Telpon</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < customer.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= customer[i].name %></td>
+                  <td><%= customer[i].username %></td>
+                  <td><%= customer[i].phoneNumber %></td>
+                  <td>
+                    <% if(customer[i].status === "Active") { %>
+                    <a disabled class="btn btn-success btn-xs"><%= customer[i].status %></a>
+                    <% } else { %>
+                    <a disabled class="btn btn-danger btn-xs"><%= customer[i].status %></a>
+                    <% } %>
+                  </td>
+                  <td>
+                    <% if(customer[i].status === "Active") { %>
+                    <button class="btn btn-danger btn-xs" onclick="update_status(`<%= customer[i].id %>`)"
+                      data-id="<%= customer[i].id %>">
+                      <span class="glyphicon glyphicon-user"></span>
+                      Nonactive User
+                    </button>
+                    <% } else { %>
+                    <button class="btn btn-warning btn-xs" onclick="update_status(`<%= customer[i].id %>`)"
+                      data-id="<%= customer[i].id %>">
+                      <span class="glyphicon glyphicon-user"></span>
+                      Active User
+                    </button>
+                    <% } %>
+                    <a href="/admin/customer/detail/<%=customer[i].id%>" class="btn btn-primary btn-xs">
+                      <span class="glyphicon glyphicon-eye-open"></span>
+                      Detail
+                    </a>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- iclude modal add -->
+
+
+<!-- iclude modal edit -->
+
+
+<%- include ../../partials/admin_layout/footer.ejs %>
+<!-- page script -->
+<script>
+  $(document).ready(function () {
+    // datatable
+    $('#customer').DataTable()
+
+    // redirect halaman tahun
+    function halaman_customer() {
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/customer')
+    }
+  })
+
+  // Change Status 
+  function update_status(id) {
+    let CustomerId = id;
+    swal({
+      title: "Yakin Ingin Change Status?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        swal({
+          title: "Success",
+          text: "Success Change Status",
+          icon: "success",
+        }).then(suksesChange => {
+          window.location.assign(`/admin/customer/status/${CustomerId}`);
+        });
+      }
+    });
+  }
+
+</script>

@@ -1,0 +1,145 @@
+<%- include ../../partials/admin_layout/header.ejs %>
+<%- include ../../partials/admin_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Customer
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active">Customer</li>
+      <li class="active">Customer Detail</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="box">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box-header with-border">
+            <div class="pull-left">
+              <a href="/admin/customer" class="btn btn-success btn-xs">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                Kembali
+              </a>
+            </div>
+            <div class="pull-right">
+              <h3 class="box-title">Detail Customer</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- data customer -->
+      <div class="row" style="margin: 30px;">
+        <div class="col-md-12">
+          <div class="col-md-5">
+            <table border="0" width="90%">
+              <tbody>
+                <tr>
+                  <td width="30%"><strong>Nama Lengkap</strong></td>
+                  <td>: &nbsp;&nbsp; <%= customer.name %></td>
+                </tr>
+                <tr>
+                  <td width="30%"><strong>Username</strong></td>
+                  <td>: &nbsp;&nbsp; <%= customer.username %></td>
+                </tr>
+                <tr>
+                  <td width="30%"><strong>No. Telp</strong></td>
+                  <td>: &nbsp;&nbsp; <%= customer.phoneNumber %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-5" align="left">
+            <table border="0" width="90%">
+              <tbody>
+                <% for (let x = 0; x < customer_address.length; x++ ) { %>
+                <tr>
+                  <td><strong>Alamat <%= x + 1 %> </strong></td>
+                  <td>: &nbsp;&nbsp; <%= customer_address[x].mainAddress %></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /.row -->
+      <!-- akhir data customer -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box-body">
+            <table id="customer_detail" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>ID Pesanan</th>
+                  <th>Tanggal</th>
+                  <th>Status</th>
+                  <th>Total Pembelian</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < customer_transaction.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= customer_transaction[i].noPesanan %></td>
+                  <td><%= customer_transaction[i].dateOfTransaction %></td>
+                  <td>
+                    <span class="pull-right-container">
+                      <% if(customer_transaction[i].status === "Lunas") { %>
+                      <small class="label pull-center bg-blue"> <%= customer_transaction[i].status %></small>
+                      <% } else if(customer_transaction[i].status === "Batal") { %>
+                      <small class="label pull-center bg-red"> <%= customer_transaction[i].status %></small>
+                      <% } else { %>
+                      <small class="label pull-center bg-orange"> <%= customer_transaction[i].status %></small>
+                      <% } %>
+                    </span>
+                  </td>
+                  <td><%= customer_transaction[i].totalHarga %></td>
+                  <td>
+                    <button class="btn btn-success btn-xs" onclick="update_status(`<%= customer_transaction[i].id %>`)"
+                      data-id="<%= customer_transaction[i].id %>">
+                      <span class="glyphicon glyphicon-eye-open"></span>
+                      Detail
+                    </button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+
+
+</div>
+
+<!-- iclude modal add -->
+
+
+<!-- iclude modal edit -->
+
+
+<%- include ../../partials/admin_layout/footer.ejs %>
+<!-- page script -->
+<script>
+  $(document).ready(function () {
+    // datatable
+    $('#customer_detail').DataTable()
+  });
+</script>
