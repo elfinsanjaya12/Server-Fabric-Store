@@ -30,6 +30,17 @@ module.exports = {
         image: '',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: 'Itce Diasari',
+        username: 'itce',
+        phoneNumber: '0898989898',
+        password: password,
+        salt: salt,
+        status: 'Active',
+        image: '',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
   },

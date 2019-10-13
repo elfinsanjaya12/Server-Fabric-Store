@@ -11,7 +11,7 @@ module.exports = {
       CustomerId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Customers",
           key: "id"
@@ -20,7 +20,7 @@ module.exports = {
       ProvinceId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Provinces",
           key: "id"
@@ -29,7 +29,7 @@ module.exports = {
       CitiesId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Cities",
           key: "id"
@@ -38,7 +38,7 @@ module.exports = {
       DistrictId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Districts",
           key: "id"

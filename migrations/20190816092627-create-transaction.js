@@ -26,7 +26,7 @@ module.exports = {
       AddressId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Addresses",
           key: "id"
@@ -36,7 +36,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       dateOfTransaction: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
+      },
+      waktu: {
+        type: Sequelize.TIME
       },
       typeOfOngkir: {
         type: Sequelize.STRING
