@@ -2,11 +2,28 @@
 <%- include ../../partials/admin_layout/sidebar.ejs %>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+  <% if(alert.message != '') { %>
+  <br>
+  <div class="alert alert-<%= alert.status %>" style="text-align: center;">
+    <strong><%= alert.message %></strong>
+  </div>
+  <% } %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Catalog
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active">Catalog</li>
+    </ol>
+  </section>
+
 
   <!-- Main content -->
   <section class="content">
-    <div class="row">
 
+    <div class="row">
       <div class="col-xs-12">
         <div class="box">
           <!-- /.box-header -->
@@ -25,6 +42,7 @@
               <thead>
                 <tr>
                   <th>No</th>
+                  <th>Image</th>
                   <th>Kode</th>
                   <th>Nama Product</th>
                   <th>Stok</th>
@@ -37,6 +55,13 @@
                 <% for (let i = 0; i < catalogs.length; i++ ) { %>
                 <tr>
                   <td><%= i + 1 %></td>
+                  <td>
+                    <% if (catalogs[i].image) { %>
+                    <img src="/catalog/<%= catalogs[i].image %>" height="70" width="70" alt="foto" />
+                    <% } else { %>
+                    Tidak Ada
+                    <% } %>
+                  </td>
                   <td><%= catalogs[i].code %></td>
                   <td><%= catalogs[i].name %></td>
                   <td><%= catalogs[i].stok %></td>
@@ -50,7 +75,7 @@
                     <button class="btn btn-danger btn-sm" onclick="update_status(`<%= catalogs[i].id %>`)"
                       data-id="<%= catalogs[i].id %>">
                       <span class="glyphicon glyphicon-remove"></span>
-                      Active
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -70,6 +95,7 @@
 </div>
 
 <!-- iclude modal add -->
+<%- include add_modal.ejs %>
 
 
 <!-- iclude modal edit -->
@@ -146,6 +172,22 @@
         });
       }
     });
+  }
+
+  // validasi foto
+  function validasiFile() {
+    var inputFile = document.getElementById('inputFoto');
+    var pathFile = inputFile.value;
+    var ekstensiOk = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!ekstensiOk.exec(pathFile)) {
+      swal({
+        title: "Warning",
+        text: "Silahkan upload file yang memiliki ekstensi .jpeg/.jpg/.png",
+        icon: "warning",
+      });
+      inputFile.value = '';
+      return false;
+    }
   }
 
 </script>
