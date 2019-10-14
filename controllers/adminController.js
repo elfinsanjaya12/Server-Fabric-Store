@@ -37,7 +37,7 @@ exports.viewCatalog = async (req, res) => {
     console.log(err)
   }
 }
-
+/* action create catalog */
 exports.actionCatalogCreate = async (req, res) => {
   const {
     code,
@@ -49,10 +49,10 @@ exports.actionCatalogCreate = async (req, res) => {
     stok,
     deskripsi,
   } = req.body
-  console.log(code)
+  // console.log(code)
   try {
     const files = req.files;
-    console.log(files);
+    // console.log(files);
     if (!files) {
       req.flash('alertMessage', "Tidak ada Foto yang di Upload, Segera Pilih Foto!");
       req.flash('alertStatus', 'danger');
@@ -93,6 +93,82 @@ exports.actionCatalogCreate = async (req, res) => {
   }
 }
 
+/* action edit catalog */
+exports.actionCatalogEdit = async (req, res) => {
+  const {
+    code,
+    name,
+    material,
+    ukuran,
+    warna,
+    harga,
+    stok,
+    deskripsi,
+    id
+  } = req.body
+  // const { id } = req.params
+  // console.log(code)
+  try {
+    let catalog = await Product.findOne({
+      where: { id: { [Op.eq]: id } }
+    })
+    const files = req.files;
+    if (files) {
+
+      if (files.foto.mimetype == "image/jpeg" || files.foto.mimetype == "image/png" || files.foto.mimetype == "image/jpg") {
+        await files.foto.mv("public/catalog/" + files.foto.name, (err) => {
+          if (err) return res.status(500).send(err);
+        });
+      } else {
+        req.flash('alertMessage', "This format is not allowed , please upload file with '.png','.gif','.jpg'");
+        req.flash('alertStatus', 'danger');
+        return res.redirect("/register");
+      }
+
+      return catalog.update({
+        code: code,
+        name: name,
+        material: material,
+        ukuran: ukuran,
+        warna: warna,
+        harga: harga,
+        stok: stok,
+        deskripsi: deskripsi,
+        image: files.foto.name
+      }).then(() => {
+        req.flash('alertMessage', `Sukses Ubah Data Catalog dengan nama : ${name}`);
+        req.flash('alertStatus', 'success');
+        res.redirect("/admin/catalog");
+      }).catch((err) => {
+        // tambah notifi error
+        res.redirect("/admin/catalog");
+      });
+    } else {
+      return catalog.update({
+        code: code,
+        name: name,
+        material: material,
+        ukuran: ukuran,
+        warna: warna,
+        harga: harga,
+        stok: stok,
+        deskripsi: deskripsi,
+      }).then(() => {
+        req.flash('alertMessage', `Sukses Ubah Data Catalog dengan nama : ${name}`);
+        req.flash('alertStatus', 'success');
+        res.redirect("/admin/catalog");
+      }).catch((err) => {
+        // tambah notifi error
+        res.redirect("/admin/catalog");
+      });
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+/* action delete catalog */
 exports.actionCatalogDetele = (req, res) => {
   const { id } = req.params
   Product.findOne({

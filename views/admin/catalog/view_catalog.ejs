@@ -68,7 +68,12 @@
                   <td><%= catalogs[i].harga %></td>
                   <td><%= catalogs[i].warna %></td>
                   <td>
-                    <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit">
+                    <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
+                      data-id="<%= catalogs[i].id %>" data-code="<%= catalogs[i].code %>"
+                      data-material="<%= catalogs[i].material %>" data-ukuran="<%= catalogs[i].ukuran %>"
+                      data-image="<%= catalogs[i].image %>" data-name="<%= catalogs[i].name %>"
+                      data-stok="<%= catalogs[i].stok %>" data-harga="<%= catalogs[i].harga %>"
+                      data-warna="<%= catalogs[i].warna %>" data-deskripsi="<%= catalogs[i].deskripsi %>">
                       <span class="glyphicon glyphicon-pencil"></span>
                       Edit
                     </a>
@@ -117,9 +122,28 @@
     //showing data to e edit modal 
     $('#catalog').on('click', '.edit', function () {
       const id = $(this).data('id');
-
+      const code = $(this).data('code');
+      const name = $(this).data('name');
+      const warna = $(this).data('warna');
+      const harga = $(this).data('harga');
+      const stok = $(this).data('stok');
+      const folderImage = $(this).data('image');
+      let image = `Foto masih tersimpan dengan nama : ${folderImage}`
+      console.log(folderImage)
+      const deskripsi = $(this).data('deskripsi');
+      const ukuran = $(this).data('ukuran');
+      const material = $(this).data('material');
       $('#edit-modal').modal('show');
       $('.id').val(id);
+      $('.image').val(image);
+      $('.name').val(name);
+      $('.warna').val(warna);
+      $('.harga').val(harga);
+      $('.stok').val(stok);
+      $('.code').val(code);
+      $('.deskripsi').val(deskripsi);
+      $('.ukuran').val(ukuran);
+      $('.material').val(material);
     });
   })
 
@@ -141,6 +165,21 @@
   // validasi foto
   function validasiFile() {
     var inputFile = document.getElementById('inputFoto');
+    var pathFile = inputFile.value;
+    var ekstensiOk = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!ekstensiOk.exec(pathFile)) {
+      swal({
+        title: "Warning",
+        text: "Silahkan upload file yang memiliki ekstensi .jpeg/.jpg/.png",
+        icon: "warning",
+      });
+      inputFile.value = '';
+      return false;
+    }
+  }
+
+  function validasiFileEdit() {
+    var inputFile = document.getElementById('inputFotoEdit');
     var pathFile = inputFile.value;
     var ekstensiOk = /(\.jpg|\.jpeg|\.png)$/i;
     if (!ekstensiOk.exec(pathFile)) {

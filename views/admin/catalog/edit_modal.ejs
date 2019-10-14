@@ -1,0 +1,79 @@
+<!-- Modal Update Product-->
+<form action="/admin/catalog/edit" method="post" enctype="multipart/form-data">
+  <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Catalog</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="code" class="form-control code" placeholder="Masukan Kode" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="name" class="form-control name" placeholder="Masukan Nama" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="material" class="form-control material" placeholder="Masukan Material or Bahan"
+                  required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="ukuran" class="form-control ukuran" placeholder="Masukan Ukuran" required>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="warna" class="form-control warna" placeholder="Masukan Warna" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="harga" class="form-control harga" placeholder="Masukan Harga" required>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="stok" class="form-control stok" placeholder="Masukan Stok" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="deskripsi" class="form-control deskripsi" placeholder="Masukan Deskripsi"
+                  required>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-12">
+              <div class="form-group">
+                <input type="file" id="inputFotoEdit" onchange="return validasiFileEdit()" name="foto"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" disabled class="form-control image" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" class="id" required name="id">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
