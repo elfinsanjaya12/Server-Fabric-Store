@@ -1,0 +1,46 @@
+<div class="tab-pane" id="selesai">
+  <div class="box-body table-responsive no-padding">
+    <table id="transaction-selesai" class="table table-hover">
+      <thead>
+        <th>No.</th>
+        <th>ID Pesanan</th>
+        <th>Tanggal</th>
+        <th>Waktu</th>
+        <th>Nama Pemesan</th>
+        <th>Status</th>
+        <th>Total Pembayaran</th>
+        <th>Aksi</th>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < transaction_lunas.length; i++ ) { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= transaction_lunas[i].noPesanan %></td>
+          <td><%= transaction_lunas[i].dateOfTransaction %></td>
+          <td><%= transaction_lunas[i].waktu %></td>
+          <td><%= transaction_lunas[i].Customer.name %></td>
+          <td>
+            <span class="pull-right-container">
+              <% if(transaction_lunas[i].status === "Lunas") { %>
+              <small class="label pull-center bg-blue"> <%= transaction_lunas[i].status %></small>
+              <% } else if(transaction_lunas[i].status === "Batal") { %>
+              <small class="label pull-center bg-red"> <%= transaction_lunas[i].status %></small>
+              <% } else { %>
+              <small class="label pull-center bg-orange"> <%= transaction_lunas[i].status %></small>
+              <% } %>
+            </span>
+          </td>
+          <td><%= transaction_lunas[i].totalHarga %></td>
+          <td>
+            <button class="btn btn-success btn-xs" onclick="update_status(`<%= transaction_lunas[i].id %>`)"
+              data-id="<%= transaction_lunas[i].id %>">
+              <span class="glyphicon glyphicon-eye-open"></span>
+              Detail
+            </button>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

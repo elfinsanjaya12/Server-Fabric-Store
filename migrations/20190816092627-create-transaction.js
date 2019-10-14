@@ -50,6 +50,9 @@ module.exports = {
       buktiPembayaran: {
         type: Sequelize.TEXT
       },
+      statusBuktiPembayaran: {
+        type: Sequelize.STRING
+      },
       shippingCosts: {
         type: Sequelize.DOUBLE
       },

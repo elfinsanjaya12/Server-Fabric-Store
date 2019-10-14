@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     typeOfOngkir: DataTypes.STRING,
     note: DataTypes.STRING,
     buktiPembayaran: DataTypes.TEXT,
+    statusBuktiPembayaran: DataTypes.STRING,
     shippingCosts: DataTypes.DOUBLE,
     noResi: DataTypes.STRING
   }, {});

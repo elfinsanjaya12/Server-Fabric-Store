@@ -294,12 +294,44 @@ exports.viewTransaction = async (req, res) => {
       }],
       where: { status: { [Op.eq]: "Lunas" } }
     })
+    // query lunas transaction dan telah diproses
+    const transaction_telah_diproses = await Transaction.findAll({
+      include: [{
+        model: Customer
+      }],
+      where: {
+        status: {
+          [Op.eq]: "Lunas"
+        },
+        statusBuktiPembayaran: {
+          [Op.eq]: "Telah Diproses"
+        }
+      }
+    })
+
+    // query lunas transaction dan telah diproses
+    const transaction_perlu_diproses = await Transaction.findAll({
+      include: [{
+        model: Customer
+      }],
+      where: {
+        status: {
+          [Op.eq]: "Lunas"
+        },
+        statusBuktiPembayaran: {
+          [Op.eq]: "Perlu Diproses"
+        }
+      }
+    })
+
     res.render('admin/transaction/view_transaction', {
       title: "Catalog Product",
       transaction_all: transaction_all,
       transaction_cencel: transaction_cencel,
       transaction_lunas: transaction_lunas,
       transaction_pendding: transaction_pendding,
+      transaction_telah_diproses: transaction_telah_diproses,
+      transaction_perlu_diproses: transaction_perlu_diproses,
       action: "view"
     })
   } catch (err) {

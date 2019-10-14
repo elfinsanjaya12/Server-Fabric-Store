@@ -1,0 +1,101 @@
+<div class="tab-pane" id="perlu-dikirim">
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#perlu-diproses" data-toggle="tab">Perlu Diproses</a></li>
+      <li><a href="#telah-diproses" data-toggle="tab">Telah Diproses</a></li>
+    </ul>
+    <div class="tab-content">
+      <!-- include tab perlu diproses -->
+      <div class="active tab-pane" id="perlu-diproses">
+        <div class="tab-content">
+          <div class="box-body table-responsive no-padding">
+            <table id="transaction-perlu-dikirim" class="table table-hover">
+              <thead>
+                <th>No.</th>
+                <th>ID Pesanan</th>
+                <th>Tanggal</th>
+                <th>Waktu</th>
+                <th>Nama Pemesan</th>
+                <th>Status</th>
+                <th>Total Pembayaran</th>
+                <th>Aksi</th>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < transaction_perlu_diproses.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= transaction_perlu_diproses[i].noPesanan %></td>
+                  <td><%= transaction_perlu_diproses[i].dateOfTransaction %></td>
+                  <td><%= transaction_perlu_diproses[i].waktu %></td>
+                  <td><%= transaction_perlu_diproses[i].Customer.name %></td>
+                  <td>
+                    <span class="pull-right-container">
+                      <small class="label pull-center bg-blue"> <%= transaction_perlu_diproses[i].status %></small>
+                    </span>
+                  </td>
+                  <td><%= transaction_perlu_diproses[i].totalHarga %></td>
+                  <td>
+                    <button class="btn btn-success btn-xs"
+                      onclick="update_status(`<%= transaction_perlu_diproses[i].id %>`)"
+                      data-id="<%= transaction_perlu_diproses[i].id %>">
+                      <span class="glyphicon glyphicon-eye-open"></span>
+                      Detail
+                    </button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- include tab perlu  -->
+      <div class="tab-pane" id="telah-diproses">
+        <div class="tab-content">
+          <div class="box-body table-responsive no-padding">
+            <table id="transaction-perlu-dikirim" class="table table-hover">
+              <thead>
+                <th>No.</th>
+                <th>ID Pesanan</th>
+                <th>Tanggal</th>
+                <th>Waktu</th>
+                <th>Nama Pemesan</th>
+                <th>Status</th>
+                <th>Total Pembayaran</th>
+                <th>Ekspedisi</th>
+                <th>Aksi</th>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < transaction_telah_diproses.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= transaction_telah_diproses[i].noPesanan %></td>
+                  <td><%= transaction_telah_diproses[i].dateOfTransaction %></td>
+                  <td><%= transaction_telah_diproses[i].waktu %></td>
+                  <td><%= transaction_telah_diproses[i].Customer.name %></td>
+                  <td>
+                    <span class="pull-right-container">
+                      <small class="label pull-center bg-blue"> <%= transaction_telah_diproses[i].status %></small>
+                    </span>
+                  </td>
+                  <td><%= transaction_telah_diproses[i].totalHarga %></td>
+                  <td><%= transaction_telah_diproses[i].typeOfOngkir %></td>
+                  <td>
+                    <button class="btn btn-success btn-xs"
+                      onclick="update_status(`<%= transaction_telah_diproses[i].id %>`)"
+                      data-id="<%= transaction_telah_diproses[i].id %>">
+                      <i class="fa fa-check-square-o"></i>
+                      Input Nomor Resi
+                    </button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
