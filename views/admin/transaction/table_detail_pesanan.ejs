@@ -1,0 +1,56 @@
+<div class="box box-primary">
+  <div class="box-body table-responsive no-padding">
+    <table id="transaction-all" class="table table-hover">
+      <thead>
+        <th>No</th>
+        <th>Kode</th>
+        <th>Nama Product</th>
+        <th>Gambar</th>
+        <th>Warna</th>
+        <th>Kuantitas</th>
+        <th>Jumlah</th>
+        <th>Catatan</th>
+      </thead>
+      <tbody>
+        <%  var subtotal = 0 %>
+        <% for (let i = 0; i < transaction_detail.length; i++ ) { %>
+        <% for(var x =0; x < product.length; x++) { %>
+        <% if(transaction_detail[i].ProductId === product[x].id) { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= product[x].code %></td>
+          <td><%= product[x].name %></td>
+          <td><%= product[x].code %></td>
+          <td>
+            <% if (product[i].image) { %>
+            <img src="/catalog/<%= product[x].image %>" height="70" width="70" alt="foto" />
+            <% } else { %>
+            Tidak Ada
+            <% } %>
+          </td>
+          <td><%= transaction_detail[i].length %></td>
+          <td>
+            <%  var jumlah = 0 %>
+            <% jumlah = transaction_detail[i].length * product[x].harga %>
+            <%  subtotal += jumlah %>
+            <%= transaction_detail[i].length * product[x].harga %>
+          </td>
+          <td><%= transaction.note %></td>
+        </tr>
+        <% } %>
+        <% } %>
+        <% } %>
+        <tr>
+          <td colspan="6"></td>
+          <td>SubTotal</td>
+          <td><%= subtotal %></td>
+        </tr>
+        <tr>
+          <td colspan="6"></td>
+          <td>Biaya Pengiriman</td>
+          <td><%= transaction.typeOfOngkir %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

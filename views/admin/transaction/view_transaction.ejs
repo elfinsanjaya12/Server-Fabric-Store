@@ -20,7 +20,7 @@
       <div class="col-md-12">
 
         <div class="nav-tabs-custom">
-          <ul class="nav nav-tabs">
+          <ul class="nav nav-tabs tabs-left">
             <li class="active"><a href="#activity" data-toggle="tab">Semua</a></li>
             <li><a href="#belum-dibayar" data-toggle="tab">Belum Dibayar</a></li>
             <li><a href="#perlu-dikirim" data-toggle="tab">Perlu Dikirim</a></li>
@@ -58,8 +58,8 @@
 </div>
 <!-- /.content -->
 
-
-
+<!-- include add modal no resi -->
+<%- include add_modal_no_resi.ejs %>
 
 <%- include ../../partials/admin_layout/footer.ejs %>
 <!-- page script -->
@@ -70,8 +70,16 @@
     $('#transaction-belum-dibayar').DataTable();
     $('#transaction-perlu-dikirim').DataTable()
     $('#transaction-dikirim').DataTable();
+    $('#transaction-perlu-diproses').DataTable();
     $('#transaction-selesai').DataTable();
     $('#transaction-pembatalan').DataTable()
 
   })
+
+  $('#transaction-perlu-diproses').on('click', '.edit', function () {
+    const id = $(this).data('id');
+    $('#edit-modal').modal('show');
+    $('.id').val(id);
+  });
+
 </script>

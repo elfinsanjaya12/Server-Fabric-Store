@@ -32,11 +32,10 @@
           </td>
           <td><%= transaction_all[i].totalHarga %></td>
           <td>
-            <button class="btn btn-success btn-xs" onclick="update_status(`<%= transaction_all[i].id %>`)"
-              data-id="<%= transaction_all[i].id %>">
+            <a href="/admin/transaction/detail/<%= transaction_all[i].id %>" class="btn btn-primary btn-xs">
               <span class="glyphicon glyphicon-eye-open"></span>
               Detail
-            </button>
+            </a>
           </td>
         </tr>
         <% } %>

@@ -53,7 +53,7 @@
       <div class="tab-pane" id="telah-diproses">
         <div class="tab-content">
           <div class="box-body table-responsive no-padding">
-            <table id="transaction-perlu-dikirim" class="table table-hover">
+            <table id="transaction-perlu-diproses" class="table table-hover">
               <thead>
                 <th>No.</th>
                 <th>ID Pesanan</th>
@@ -81,12 +81,12 @@
                   <td><%= transaction_telah_diproses[i].totalHarga %></td>
                   <td><%= transaction_telah_diproses[i].typeOfOngkir %></td>
                   <td>
-                    <button class="btn btn-success btn-xs"
-                      onclick="update_status(`<%= transaction_telah_diproses[i].id %>`)"
+
+                    <a href="javascript:void(0);" type="button" class="btn btn-success btn-xs edit"
                       data-id="<%= transaction_telah_diproses[i].id %>">
-                      <i class="fa fa-check-square-o"></i>
+                      <span class="glyphicon glyphicon-pencil"></span>
                       Input Nomor Resi
-                    </button>
+                    </a>
                   </td>
                 </tr>
                 <% } %>

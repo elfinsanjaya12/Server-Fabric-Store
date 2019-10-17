@@ -2,7 +2,7 @@ let express = require("express")
 let router = express.Router()
 const {
   viewDashboard,
-  // controller catalog
+  /* controller catalog */
   viewCatalog,
   actionCatalogCreate,
   actionCatalogDetele,
@@ -11,9 +11,10 @@ const {
   viewCustomer,
   viewCustomerInDetail,
   actionCustomerUpdateStatus,
-  viewTransaction
+  viewTransaction,
+  viewTransactionDetail,
+  actionUpdateNoresi
 } = require("../controllers/adminController");
-
 
 /* 
   *dashboard
@@ -34,6 +35,9 @@ router.get("/customer/status/:id", actionCustomerUpdateStatus);
 
 // router transaction
 router.get("/transaction", viewTransaction);
+router.get("/transaction/detail/:id", viewTransactionDetail);
+router.post("/transaction/update_noresi", actionUpdateNoresi);
+
 
 
 

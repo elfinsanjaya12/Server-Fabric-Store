@@ -10,7 +10,8 @@ const {
   Product,
   Customer,
   Transaction,
-  Address
+  Address,
+  TransactionDetail
 } = require('../models')
 const Op = require("sequelize").Op
 
@@ -260,7 +261,6 @@ exports.actionCustomerUpdateStatus = async (req, res) => {
 
 /* ============================================================================== */
 
-
 /* ============================================================================== */
 /* view transaction */
 exports.viewTransaction = async (req, res) => {
@@ -337,6 +337,57 @@ exports.viewTransaction = async (req, res) => {
   } catch (err) {
     console.log(err)
   }
+}
+
+/* view transaction detail */
+exports.viewTransactionDetail = async (req, res) => {
+  const { id } = req.params
+  try {
+
+    // query read transaction by id
+    const transaction = await Transaction.findOne({
+      include: [
+        { model: Customer },
+        { model: Address }
+      ],
+      where: { id: { [Op.eq]: id } }
+    })
+    console.log(transaction)
+
+    // query read transaction by transaction id
+    const transaction_detail = await TransactionDetail.findAll({
+      include: [{ model: Product }],
+      where: { TransactionId: { [Op.eq]: transaction.id } }
+    })
+
+    // query read all product
+    const product = await Product.findAll()
+
+
+    res.render('admin/transaction/view_transaction_detail', {
+      title: "Transaction Detail",
+      transaction: transaction,
+      transaction_detail: transaction_detail,
+      product: product
+    })
+  } catch (error) {
+    console.log(err)
+  }
+}
+
+/* action update transaction add no resi */
+exports.actionUpdateNoresi = async (req, res) => {
+  const { id, noResi } = req.body
+  const transaction = await Transaction.findOne({
+    where: { id: { [Op.eq]: id } }
+  })
+
+  if (transaction) {
+    transaction.noResi = noResi
+    await transaction.save()
+    // res.redirect('/admin/transaction')
+  }
+  res.redirect('/admin/transaction')
 }
 
 /* ============================================================================== */

@@ -1,0 +1,101 @@
+<!-- informasi pembayaran -->
+<div class="col-sm-6">
+  <!-- general form elements -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <div class="row" style="margin: 10px;">
+        <div class="col-sm-5">
+          <h3 class="box-title">ID Pesanan</h3>
+        </div>
+        <div class="col-sm-6">
+          <h3 class="box-title"><%- transaction.noPesanan %></h3>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px;">
+        <div class="col-sm-5">
+          <h3 class="box-title">An. Nama</h3>
+        </div>
+        <div class="col-sm-6">
+          <h3 class="box-title"><%- transaction.Customer.name %></h3>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px;">
+        <div class="col-sm-5">
+          <h3 class="box-title">Nominal Transfer</h3>
+        </div>
+        <div class="col-sm-6">
+          <h3 class="box-title"><%- transaction.totalHarga %></h3>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px;">
+        <div class="col-sm-5">
+          <h3 class="box-title">Catatan</h3>
+        </div>
+        <div class="col-sm-6">
+          <h3 class="box-title"><%- transaction.note %></h3>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px;">
+        <div class="col-sm-5">
+          <h3 class="box-title">Bukti Pembayaran</h3>
+        </div>
+        <div class="col-sm-6">
+          <h3 class="box-title">Nominal Transfer</h3>
+        </div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <!-- <div class="col-sm-4">
+          <button class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Verifikasi Penerimaan Pesanan
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Produk Telah Dikemas
+          </button>
+        </div> -->
+        <div class="col-sm-5">
+          <button class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Verifikasi Penerimaan Pesanan
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Produk Telah Dikemas
+          </button>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Verifikasi Di Tolak
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- informasi pembayaran -->
+
+<div class="col-sm-6">
+  <!-- general form elements -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <div class="row" style="margin: 10px;">
+        <div class="col-sm-12">
+          <h3 class="box-title">Alamat Pengiriman</h3>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px;">
+        <div class="col-sm-12">
+          <h3 class="box-title"><%- transaction.Address.mainAddress %></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

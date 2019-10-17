@@ -13,7 +13,16 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        CustomerId: 1,
+        CustomerId: 2,
+        // ProvinceId: 11,
+        // CitiesId: 1101,
+        // DistrictId: 1101010,
+        mainAddress: "Bandar Lampung",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        CustomerId: 3,
         // ProvinceId: 11,
         // CitiesId: 1101,
         // DistrictId: 1101010,

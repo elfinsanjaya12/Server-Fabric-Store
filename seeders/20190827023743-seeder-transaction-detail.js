@@ -12,21 +12,21 @@ module.exports = {
       },
       {
         length: 3,
-        TransactionId: 1,
+        TransactionId: 2,
         ProductId: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         length: 3,
-        TransactionId: 2,
+        TransactionId: 3,
         ProductId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         length: 3,
-        TransactionId: 3,
+        TransactionId: 4,
         ProductId: 4,
         createdAt: new Date(),
         updatedAt: new Date()
