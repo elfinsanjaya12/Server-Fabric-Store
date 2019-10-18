@@ -13,12 +13,40 @@ const {
   Address,
   TransactionDetail
 } = require('../models')
+const sequelize = require("sequelize")
 const Op = require("sequelize").Op
 
 // dashboard 
-exports.viewDashboard = (req, res) => {
+exports.viewDashboard = async (req, res) => {
+  const customer = await Customer.count()
+
+  const pendapatan = await Transaction.findAll({
+    attributes: ['id', [sequelize.fn('sum', sequelize.col("totalHarga")), 'total']],
+    raw: true
+  })
+
+  const stok = await Product.findAll()
+
+  const penjualan_permeter = await TransactionDetail.findAll({
+    attributes: ['id', [sequelize.fn('sum', sequelize.col("length")), 'meter']],
+    raw: true
+  })
+
+  const pesanan_baru = await Transaction.findAll({
+    include: [{
+      model: Customer
+    }],
+    limit: 10
+  })
+  console.log(pesanan_baru)
+
   res.render('admin/dashboard/dashboard', {
-    title: "Dashboard"
+    title: "Dashboard",
+    customer: customer,
+    pendapatan: pendapatan[0].total,
+    penjualan_permeter: penjualan_permeter[0].meter,
+    pesanan_baru: pesanan_baru,
+    stok: stok
   })
 }
 
@@ -389,6 +417,8 @@ exports.actionUpdateNoresi = async (req, res) => {
   }
   res.redirect('/admin/transaction')
 }
+
+
 
 /* ============================================================================== */
 

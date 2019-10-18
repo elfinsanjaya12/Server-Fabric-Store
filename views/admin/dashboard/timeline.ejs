@@ -1,0 +1,50 @@
+<div class="col-md-4">
+  <!-- The time line -->
+  <ul class="timeline">
+    <!-- timeline time label -->
+    <li class="time-label">
+      <span class="bg-red">
+        Peringatan!
+      </span>
+    </li>
+    <!-- /.timeline-label -->
+    <!-- timeline item -->
+
+    <% for (let i = 0; i < stok.length; i++ ) { %>
+    <%  if(stok[i].stok < 5 && stok[i].stok !==0){ %>
+    <li>
+      <i class="fa fa-envelope bg-blue"></i>
+      <div class="timeline-item">
+
+        <h3 class="timeline-header"><a href="#">Stok Menipis</h3>
+        <div class="timeline-body">
+          <a class="btn btn-primary btn-xs">Produk A-002 tersisa kurang
+            dari 5 meter.</a>
+        </div>
+        <!-- <div class="timeline-footer">
+              <a class="btn btn-primary btn-xs">tersisa kurang
+                dari 5 meter.</a>
+            </div> -->
+      </div>
+    </li>
+    <% } else if  (stok[i].stok === 0){ %>
+    <li>
+      <i class="fa fa-envelope bg-red"></i>
+      <div class="timeline-item">
+
+        <h3 class="timeline-header"><a href="#" style="color: red;">Stok Telah Habis</h3>
+        <div class="timeline-body">
+          <a class="btn btn-primary btn-xs">Produk <%= stok[i].code %> telah terjual.</a>
+        </div>
+        <!-- <div class="timeline-footer">
+                  <a class="btn btn-primary btn-xs">tersisa kurang
+                    dari 5 meter.</a>
+                </div> -->
+      </div>
+    </li>
+    <% } %>
+    <% } %>
+
+
+  </ul>
+</div>

@@ -1,0 +1,48 @@
+<div class="col-sm-8">
+  <div class="box">
+    <!-- /.box-header -->
+    <div class="box-header">
+      <h3 class="box-title">Data catalogs</h3>
+    </div>
+
+
+    <div class="box-body table-responsive no-padding">
+      <table id="transaction-all" class="table table-hover">
+        <thead>
+          <th>ID Pesanan</th>
+          <th>Tanggal</th>
+          <th>Nama Pemesan</th>
+          <th>Status</th>
+          <th>Total Pembayaran</th>
+
+        </thead>
+        <tbody>
+          <% for (let i = 0; i < pesanan_baru.length; i++ ) { %>
+          <tr>
+            <td><%= pesanan_baru[i].noPesanan %></td>
+            <td><%= pesanan_baru[i].dateOfTransaction %></td>
+            <td><%= pesanan_baru[i].Customer.name %></td>
+            <td>
+              <span class="pull-right-container">
+                <% if(pesanan_baru[i].status === "Lunas") { %>
+                <small class="label pull-center bg-blue"> <%= pesanan_baru[i].status %></small>
+                <% } else if(pesanan_baru[i].status === "Batal") { %>
+                <small class="label pull-center bg-red"> <%= pesanan_baru[i].status %></small>
+                <% } else { %>
+                <small class="label pull-center bg-orange"> <%= pesanan_baru[i].status %></small>
+                <% } %>
+              </span>
+            </td>
+            <td><%= pesanan_baru[i].totalHarga %></td>
+            <td>
+              <a href="/admin/transaction/detail/<%= pesanan_baru[i].id %>" class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Detail
+              </a>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
