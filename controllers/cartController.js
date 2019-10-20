@@ -19,6 +19,7 @@ let include = {
 exports.actionReadAll = async function (req, res) {
   const { CustomerId } = req.params
   try {
+
     const cart = await Cart.findAll({
       ...include,
       where: {

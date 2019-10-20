@@ -8,22 +8,6 @@ const { Transaction,
 
 const Op = require("sequelize").Op
 
-
-async function validate(req) {
-  let {
-    noPesanan, //gak wajib
-    totalHarga,
-    CustomerId,
-    AddressId,
-    status, //gak wajib
-    dateOfTransaction,
-    typeOfOngkir,
-    note,
-    buktiPembayaran, //gak wajib
-    shippingCosts,
-    noResi //gak wajib
-  } = req.body
-}
 exports.actionCreate = async (req, res) => {
   let {
     // noPesanan, //gak wajib

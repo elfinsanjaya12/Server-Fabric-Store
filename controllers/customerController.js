@@ -6,7 +6,7 @@
  * @author Elfin Sanjaya
  */
 
-const { Customer } = require('../models')
+const { Customer, Address } = require('../models')
 const apiConfig = require("../config/api.json")
 const jwt = require("jsonwebtoken")
 const Op = require("sequelize").Op
@@ -140,6 +140,14 @@ exports.actionRegisterMobile = async function (req, res) {
   });
 
   if (customerCreate) {
+
+    const address = await Address.create({
+      CustomerId: customerCreate.id,
+      ProvinceId,
+      CitiesId,
+      mainAddress
+    })
+
     errors = await validateLogin(req);
     if (errors.length > 0) return res.status(422).json({ errors });
 
@@ -153,11 +161,12 @@ exports.actionRegisterMobile = async function (req, res) {
     try {
       let customer_ = customer.get({ plain: true });
       const accessToken = jwt.sign(customer_, apiConfig.key);
-      console.log("accessToken")
+
       return res.json({
         message: "Success Signup customer",
         accessToken,
-        customerCreate
+        customerCreate,
+        address
       });
     } catch (error) {
       return res.status(422).json([{ field: "jwt", message: error.message }]);
@@ -294,20 +303,20 @@ exports.actionUpdateStatus = async (req, res) => {
 }
 
 exports.actionReadSingleCustomer = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
 
-  try{
+  try {
     const customer = await Customer.findOne({
-      where:{
-        id:{[Op.eq]:id}
+      where: {
+        id: { [Op.eq]: id }
       }
     })
 
-   return res.status(200).json({
-      message : "Success Read Single Data Customer",
+    return res.status(200).json({
+      message: "Success Read Single Data Customer",
       customer
     })
-  }catch(err){
+  } catch (err) {
     console.log(err)
   }
 

@@ -24,10 +24,24 @@
           "username": "example",
           "phoneNumber": "08237795xxxx",
           "password": "example",
-          "retypePassword": "example"
+          "retypePassword": "example",
+          "ProvinceId": 1,
+          "CitiesId": 1
         },
         "hasil test": "ok",
         "middleware": "tidak"
+      },
+      "profile customer by": {
+        "method": "GET",
+        "url": "/api/v1/customer/{id}?apiKey=example&accessToken=example",
+        "params": {
+          "id": "id",
+          "apiKey": "example",
+          "accessToken": "example"
+        },
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
       },
       "catalog product": {
         "method": "GET",

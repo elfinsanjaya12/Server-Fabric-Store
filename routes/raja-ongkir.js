@@ -23,7 +23,9 @@ router.get("/provinsi", function (req, res) {
 
 router.get("/kota/:id", function (req, res) {
   const allCityInProvince = request.get(`/city?&province=${req.params.id}`);
+
   allCityInProvince.then((city) => {
+    console.log(citi)
     let citi = JSON.parse(city);
     res.send(citi);
   });
@@ -36,6 +38,7 @@ router.get("/kota/:id", function (req, res) {
 });
 
 router.post("/", function (req, res) {
+
   const form = req.body;
   const data = {
     origin: form.origin,
