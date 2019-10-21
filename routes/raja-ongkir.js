@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Address } = require("../models")
-const sequelize = require("sequelize")
+const { Address, Cart } = require("../models")
 const Op = require("sequelize").Op
 // var http = require("https");
 const { init } = require("rajaongkir-node-js");
@@ -42,13 +41,43 @@ router.get("/kota/:id", function (req, res) {
 
 router.post("/", function (req, res) {
 
-  const { CustomerId } = req.body
+  const { CustomerId, courier } = req.body
+
+  let weight = 200;
 
   Address.findOne({
     where: { CustomerId: { [Op.eq]: CustomerId } }
-  }).then((result) => {
-    console.log(result)
-    res.status(200).json(result)
+  }).then(async (address) => {
+
+    const cart = await Cart.findAll({
+      where: {
+        CustomerId: { [Op.eq]: CustomerId }
+      }
+    })
+    if (cart) {
+      var meter = 0;
+      for (let i = 0; i < cart.length; i++) {
+        meter += cart[i].permeter
+      }
+
+      weight *= meter;
+
+      const data = {
+        origin: 21,
+        destination: address.CitiesId,
+        weight: weight,
+        courier: courier // bisa merequest satu atau beberapa kurir sekaligus
+      };
+
+      const cost = request.post("cost", data);
+
+      cost.then((cst) => {
+        let cekOngkir = JSON.parse(cst);
+        res.status(200).json(cekOngkir)
+        // res.send(cst);
+        // console.log(cst);
+      });
+    }
   }).catch((err) => {
     console.log(err)
   });

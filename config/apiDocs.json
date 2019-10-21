@@ -210,7 +210,7 @@
         "params": "",
         "body": "",
         "hasil test": "ok",
-        "middleware": "ya"
+        "middleware": "tidak"
       },
       "get all city by province": {
         "method": "GET",
@@ -220,7 +220,18 @@
         },
         "body": "",
         "hasil test": "ok",
-        "middleware": "ya"
+        "middleware": "tidak"
+      },
+      "cek ongkir": {
+        "method": "POST",
+        "url": "/api/v1/cek-ongkir",
+        "params": "",
+        "body": {
+          "CustomerId": 1,
+          "courier": "jne"
+        },
+        "hasil test": "ok",
+        "middleware": "tidak"
       }
     }
   },
