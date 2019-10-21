@@ -73,7 +73,7 @@ router.post("/", function (req, res) {
 
       cost.then((cst) => {
         let cekOngkir = JSON.parse(cst);
-        res.status(200).json(cekOngkir)
+        res.status(200).json(cekOngkir.rajaongkir.results)
         // res.send(cst);
         // console.log(cst);
       });
