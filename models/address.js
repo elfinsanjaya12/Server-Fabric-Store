@@ -12,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     Address.belongsTo(sequelize.models.Customer, {
       foreignKey: "CustomerId"
     });
-    Address.belongsTo(sequelize.models.Province, {
-      foreignKey: "ProvinceId"
-    });
-    Address.belongsTo(sequelize.models.City, {
-      foreignKey: "CitiesId"
-    });
-    Address.belongsTo(sequelize.models.District, {
-      foreignKey: "DistrictId"
-    });
+    // Address.belongsTo(sequelize.models.Province, {
+    //   foreignKey: "ProvinceId"
+    // });
+    // Address.belongsTo(sequelize.models.City, {
+    //   foreignKey: "CitiesId"
+    // });
+    // Address.belongsTo(sequelize.models.District, {
+    //   foreignKey: "DistrictId"
+    // });
   };
   return Address;
 };

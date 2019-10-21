@@ -19,30 +19,30 @@ module.exports = {
       },
       ProvinceId: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: true,
-        references: {
-          model: "Provinces",
-          key: "id"
-        }
+        // onDelete: "CASCADE",
+        // allowNull: true,
+        // references: {
+        //   model: "Provinces",
+        //   key: "id"
+        // }
       },
       CitiesId: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: true,
-        references: {
-          model: "Cities",
-          key: "id"
-        }
+        // onDelete: "CASCADE",
+        // allowNull: true,
+        // references: {
+        //   model: "Cities",
+        //   key: "id"
+        // }
       },
       DistrictId: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: true,
-        references: {
-          model: "Districts",
-          key: "id"
-        }
+        // onDelete: "CASCADE",
+        // allowNull: true,
+        // references: {
+        //   model: "Districts",
+        //   key: "id"
+        // }
       },
       mainAddress: {
         type: Sequelize.STRING

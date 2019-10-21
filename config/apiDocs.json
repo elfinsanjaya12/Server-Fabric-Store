@@ -203,6 +203,24 @@
         },
         "hasil test": "ok",
         "middleware": "ya"
+      },
+      "get all province": {
+        "method": "GET",
+        "url": "/api/v1/cek-ongkir/provinsi",
+        "params": "",
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
+      },
+      "get all city by province": {
+        "method": "GET",
+        "url": "/api/v1/cek-ongkir/kota/${id}",
+        "params": {
+          "ProvinceId": "ProvinceId"
+        },
+        "body": "",
+        "hasil test": "ok",
+        "middleware": "ya"
       }
     }
   },

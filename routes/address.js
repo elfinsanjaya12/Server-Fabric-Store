@@ -8,10 +8,10 @@ const {
 } = require("../controllers/addressController")
 const auth = require("../middlewares/auth")
 
-router.use("/address", auth)
-router.get("/address/:CustomerId", actionReadAllSingleCustomer)
 router.post("/address", actionCreate)
 router.get("/address/edit/:id", actionReadSingleAddress)
+router.use("/address", auth)
+router.get("/address/:CustomerId", actionReadAllSingleCustomer)
 router.delete("/address/:id", actionDelete)
 
 module.exports = router

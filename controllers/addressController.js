@@ -13,9 +13,9 @@ const Op = require("sequelize").Op
 let include = {
   include: [
     { model: Customer },
-    { model: Province },
-    { model: City },
-    { model: District },
+    // { model: Province },
+    // { model: City },
+    // { model: District },
   ]
 }
 
