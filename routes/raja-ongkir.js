@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { Address } = require("../models")
+const sequelize = require("sequelize")
+const Op = require("sequelize").Op
 // var http = require("https");
 const { init } = require("rajaongkir-node-js");
 const request = init("0cbb08180c15e7b79c3cc1eddda5d06e", "starter");
