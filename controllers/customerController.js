@@ -121,7 +121,9 @@ exports.actionRegisterMobile = async function (req, res) {
     name,
     username,
     phoneNumber,
-    password
+    password,
+    ProvinceId,
+    CitiesId
   } = req.body
   let salt = sha1(uniqid())
 
@@ -145,7 +147,6 @@ exports.actionRegisterMobile = async function (req, res) {
       CustomerId: customerCreate.id,
       ProvinceId,
       CitiesId,
-      mainAddress
     })
 
     errors = await validateLogin(req);

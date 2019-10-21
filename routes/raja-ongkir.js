@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { Address } = require("../models")
 // var http = require("https");
 const { init } = require("rajaongkir-node-js");
 const request = init("0cbb08180c15e7b79c3cc1eddda5d06e", "starter");
@@ -39,20 +40,32 @@ router.get("/kota/:id", function (req, res) {
 
 router.post("/", function (req, res) {
 
-  const form = req.body;
-  const data = {
-    origin: form.origin,
-    destination: form.destination,
-    weight: form.weight,
-    courier: form.courier // bisa merequest satu atau beberapa kurir sekaligus
-  };
-  const cost = request.post("cost", data);
-  cost.then((cst) => {
-    let cekOngkir = JSON.parse(cst);
-    res.status(200).json(cekOngkir)
-    // res.send(cst);
-    // console.log(cst);
+  const { CustomerId } = req.body
+
+  Address.findOne({
+    where: { CustomerId: { [Op.eq]: CustomerId } }
+  }).then((result) => {
+    console.log(result)
+    res.status(200).json(result)
+  }).catch((err) => {
+    console.log(err)
   });
+
+
+  // const form = req.body;
+  // const data = {
+  //   origin: form.origin,
+  //   destination: form.destination,
+  //   weight: form.weight,
+  //   courier: form.courier // bisa merequest satu atau beberapa kurir sekaligus
+  // };
+  // const cost = request.post("cost", data);
+  // cost.then((cst) => {
+  //   let cekOngkir = JSON.parse(cst);
+  //   res.status(200).json(cekOngkir)
+  //   // res.send(cst);
+  //   // console.log(cst);
+  // });
 });
 
 module.exports = router;
