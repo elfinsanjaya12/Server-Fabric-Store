@@ -249,9 +249,14 @@ exports.actionCreate = async function (req, res) {
 
   try {
     const cekCart = await Cart.findOne({
-      where: { ProductId: { [Op.eq]: ProductId } }
+      where: {
+        CustomerId: { [Op.eq]: CustomerId },
+        ProductId: { [Op.eq]: ProductId }
+      }
     })
     if (cekCart) {
+      console.log("if" + CustomerId)
+      cekCart.CustomerId = CustomerId
       cekCart.permeter += parseFloat(permeter)
       await cekCart.save();
       return res.status(200).json({
@@ -259,6 +264,7 @@ exports.actionCreate = async function (req, res) {
         cart: cekCart
       })
     } else {
+      console.log("else" + CustomerId)
       const cart = await Cart.create({
         CustomerId,
         ProductId,
