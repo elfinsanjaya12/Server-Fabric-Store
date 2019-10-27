@@ -248,34 +248,45 @@ exports.actionCreate = async function (req, res) {
   if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
-    const cekCart = await Cart.findOne({
+    const cekStatusCustomer = await Customer.findOne({
       where: {
-        CustomerId: { [Op.eq]: CustomerId },
-        ProductId: { [Op.eq]: ProductId }
-      }
+        id: { [Op.eq]: CustomerId },
+        status: { [Op.eq]: "Active" }
+      },
     })
-    if (cekCart) {
-      console.log("if" + CustomerId)
-      cekCart.CustomerId = CustomerId
-      cekCart.permeter += parseFloat(permeter)
-      await cekCart.save();
-      return res.status(200).json({
-        message: "Success Create Cart",
-        cart: cekCart
+
+    if (cekStatusCustomer) {
+      const cekCart = await Cart.findOne({
+        where: {
+          CustomerId: { [Op.eq]: CustomerId },
+          ProductId: { [Op.eq]: ProductId }
+        }
       })
+
+      if (cekCart) {
+        cekCart.CustomerId = CustomerId
+        cekCart.permeter += parseFloat(permeter)
+        await cekCart.save();
+        return res.status(200).json({
+          message: "Success Create Cart",
+          cart: cekCart
+        })
+      } else {
+        const cart = await Cart.create({
+          CustomerId,
+          ProductId,
+          permeter
+        })
+        return res.status(200).json({
+          message: "Success Create Cart",
+          cart
+        })
+      }
     } else {
-      console.log("else" + CustomerId)
-      const cart = await Cart.create({
-        CustomerId,
-        ProductId,
-        permeter
-      })
-      return res.status(200).json({
-        message: "Success Create Cart",
-        cart
+      return res.status(404).json({
+        message: "Customer Not Found",
       })
     }
-
   } catch (err) {
     console.log(err)
   }
