@@ -10,7 +10,7 @@ module.exports = {
     let password = sha1("rahasia" + salt);
     return queryInterface.bulkInsert('Customers', [
       {
-        name: 'John Doe',
+        name: 'Ali Imran',
         username: 'ali',
         phoneNumber: '082377954008',
         password: password,
