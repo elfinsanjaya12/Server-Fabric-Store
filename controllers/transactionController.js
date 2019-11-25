@@ -29,7 +29,7 @@ exports.actionCreate = async (req, res) => {
     noPesanan: noPesanan,
     CustomerId,
     AddressId,
-    status: "Pendding",
+    status: "Tertunda",
     dateOfTransaction: new Date(),
     typeOfOngkir,
     note,

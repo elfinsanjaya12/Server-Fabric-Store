@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Transactions', [
       {
-        noPesanan: 'P001',
+        noPesanan: '0001',
         totalHarga: 60000,
         CustomerId: 1,
         AddressId: 1,
@@ -21,7 +21,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        noPesanan: 'P002',
+        noPesanan: '0002',
         totalHarga: 60000,
         CustomerId: 3,
         AddressId: 2,
@@ -38,7 +38,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        noPesanan: 'P004',
+        noPesanan: '0004',
         totalHarga: 60000,
         CustomerId: 3,
         AddressId: 3,
@@ -55,7 +55,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        noPesanan: 'P003',
+        noPesanan: '0003',
         totalHarga: 60000,
         CustomerId: 3,
         AddressId: 3,
