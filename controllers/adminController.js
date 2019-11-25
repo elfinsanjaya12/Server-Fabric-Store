@@ -11,9 +11,11 @@ const {
   Customer,
   Transaction,
   Address,
-  TransactionDetail
+  TransactionDetail,
+  User
 } = require('../models')
 const sequelize = require("sequelize")
+const bcrypt = require("bcryptjs");
 const Op = require("sequelize").Op
 
 // dashboard 
@@ -69,7 +71,6 @@ exports.viewCatalog = async (req, res) => {
 /* action create catalog */
 exports.actionCatalogCreate = async (req, res) => {
   const {
-    code,
     name,
     material,
     ukuran,
@@ -98,8 +99,29 @@ exports.actionCatalogCreate = async (req, res) => {
       return res.redirect("/register");
     }
 
+    const product = await Product.findAll({
+      order: [
+        ['id', 'DESC'],
+      ],
+    })
+
+    // ambil data kode product paling akhir dengan desc
+    const data = product[0].code;
+    var reg = /\d/g;
+    var match = data.match(reg);
+    let tampung = '';
+    if (match.length > 0) {
+      for (let i = 0; i < match.length; i++) {
+        tampung += match[i];
+      }
+    }
+    var auto = Number(tampung) + 1;
+    var kode = "P-OO";
+    let code_auto = kode + auto;
+    /* akhir kode product automatic */
+
     Product.create({
-      code,
+      code: code_auto,
       name,
       material,
       ukuran,
@@ -418,7 +440,59 @@ exports.actionUpdateNoresi = async (req, res) => {
   res.redirect('/admin/transaction')
 }
 
-
-
 /* ============================================================================== */
+/* login */
+/**
+ * view signin 
+ * GET
+ * /signin
+ */
+exports.viewSignin = (req, res) => {
+  if (req.session.user == null || req.session.user == undefined) {
+    res.render("login", { action: "false" });
+  } else {
+    res.redirect('/admin')
+  }
+}
+/**
+ * action login
+ * POST
+ * /signin/action
+ */
+exports.actionLogin = async (req, res) => {
+
+  const { username, password } = req.body;
+  const user = await User.findOne({ where: { username: { [Op.eq]: username } } });
+
+  if (user) {
+    const checkPassword = await bcrypt.compare(password, user.password);
+
+    if (checkPassword) {
+      req.session.user = {
+        id: user.id,
+        username: user.username,
+        status: user.status
+      }
+
+      if (user.status === "super admin") {
+        res.redirect("/admin/dashboard");
+      }
+    } else {
+      res.redirect("/signin");
+    }
+  } else {
+    res.render("login", { action: "view" });
+  }
+}
+
+/**
+ * action logout
+ * get
+ * /logout
+ */
+exports.actionLogout = async (req, res) => {
+  req.session.destroy()
+  res.redirect('/signin');
+}
+
 

@@ -13,30 +13,40 @@ const {
   actionCustomerUpdateStatus,
   viewTransaction,
   viewTransactionDetail,
-  actionUpdateNoresi
+  actionUpdateNoresi,
+
+  // login
+  viewSignin,
+  actionLogin,
+  actionLogout
 } = require("../controllers/adminController");
 
 /* 
   *dashboard
 */
-router.get("/dashboard", viewDashboard);
+router.get("/admin/dashboard", viewDashboard);
 
 
 // router catalog product 
-router.get("/catalog", viewCatalog);
-router.post("/catalog/create", actionCatalogCreate);
-router.get("/catalog/delete/:id", actionCatalogDetele);
-router.post("/catalog/edit", actionCatalogEdit);
+router.get("/admin/catalog", viewCatalog);
+router.post("/admin/catalog/create", actionCatalogCreate);
+router.get("/admin/catalog/delete/:id", actionCatalogDetele);
+router.post("/admin/catalog/edit", actionCatalogEdit);
 
 // router customer 
-router.get("/customer", viewCustomer);
-router.get("/customer/detail/:id", viewCustomerInDetail);
-router.get("/customer/status/:id", actionCustomerUpdateStatus);
+router.get("/admin/customer", viewCustomer);
+router.get("/admin/customer/detail/:id", viewCustomerInDetail);
+router.get("/admin/customer/status/:id", actionCustomerUpdateStatus);
 
 // router transaction
-router.get("/transaction", viewTransaction);
-router.get("/transaction/detail/:id", viewTransactionDetail);
-router.post("/transaction/update_noresi", actionUpdateNoresi);
+router.get("/admin/transaction", viewTransaction);
+router.get("/admin/transaction/detail/:id", viewTransactionDetail);
+router.post("/admin/transaction/update_noresi", actionUpdateNoresi);
+
+// router login dan logout
+router.get("/signin", viewSignin);
+router.post("/signin/action", actionLogin);
+router.get("/logout", actionLogout);
 
 
 

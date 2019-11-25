@@ -96,3 +96,26 @@ exports.actionReadTransaction = async (req, res) => {
     throw err
   }
 }
+
+exports.actionUploadBuktiBayar = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { buktiPembayaran } = req.body
+    const transaction = await Transaction.findOne({
+      where: {
+        id: { [Op.eq]: id },
+      }
+    })
+
+    if (transaction) {
+      transaction.buktiPembayaran = buktiPembayaran
+      await transaction.save()
+    }
+    return res.status(201).json({
+      message: "Success Upload Bukti Bayar Transaction",
+      transaction
+    })
+  } catch (err) {
+    throw err
+  }
+}
